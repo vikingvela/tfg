@@ -1,0 +1,19 @@
+{
+  "name": "tfg",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build-css": "tailwindcss build -i Httpdocs/src/style.css -o Http/css/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tw-elements": "^1.0.0-beta2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}

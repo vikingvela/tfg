@@ -1,0 +1,26 @@
+{
+    "name": "macbook/tfg",
+    "authors": [
+        {
+            "name": "Viking Vela",
+            "email": "real.viking@icloud.com"
+        }
+    ],
+    "require": {
+        "illuminate/collections": "^10.9"
+    },
+    "autoload": {
+    "psr-4":{
+        "Core\\": "Core/",
+        "Http\\": "Http/"
+        }        
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
