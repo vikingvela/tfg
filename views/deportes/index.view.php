@@ -13,7 +13,6 @@
                 </li>
             <?php endforeach; ?>
         </ul>
-
         <div class="card">
             <div class="card-header">
                 Deportes en las que participas:
@@ -42,8 +41,6 @@
                         </tbody>
                     </table>
                 </div>
-                
-
                 <h4 class="card-title">Title</h4>
                 <p class="card-text">Text</p>
             </div>
@@ -51,7 +48,6 @@
                 Footer
             </div>
         </div>
-
         <div> <!-- Mis equipos -->
             <div class="text-xl">
                 <p>
