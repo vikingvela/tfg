@@ -2,8 +2,13 @@
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
 
-<main>
+<main>    
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="text-xl">
+            <p>
+                ESTO ES UNA PRUEBA:
+            </p>
+        <!--
         <ul>
             <?php foreach ($deportes as $deporte) : ?>
                 <li>
@@ -13,6 +18,7 @@
                 </li>
             <?php endforeach; ?>
         </ul>
+        -->
         <div class="card">
             <div class="card-header">
                 Deportes en las que participas:

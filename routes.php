@@ -3,6 +3,8 @@
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
 $router->get('/contacto', 'contacto.php');
+$router->get('/prueba', 'prueba.php');
+$router->post('/prueba', 'prueba.php');
 
 $router->get('/ligas', 'ligas/index.php');
 $router->get('/liga', 'ligas/show.php');
