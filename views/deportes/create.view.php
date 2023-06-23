@@ -10,20 +10,21 @@
           <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre del deporte</label>
           <div class="mt-2">
             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                <input type="text" name="nombre" id="nombre" autocomplete="nombre" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Ejemplo: Fútbol playa 4x4"
-                    <?= $_POST['nombre'] ?? '' ?>>
+                <input type="text" name="nombre" id="nombre" autocomplete="nombre" required class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Ejemplo: Fútbol playa 4x4">
                 <?php if (isset($errors['nombre'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['nombre'] ?></p><?php endif; ?>
             </div>
           </div>
         </div>
         <!-- Logo -->   
         <div class="container-fluid mx-4 p-4">
-          <label for="logo" class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
+          <label class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
           <div class="mt-2 flex items-center gap-x-3">
-            <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <svg for="logo" class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
             </svg>
-            <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Cambiar</button>
+            <input type="file" id="logo" name="logo" class="sr-only">
+            <label for="logo" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+            <span class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Subir</span>
           </div>
         </div>
         <!-- Portada -->
@@ -36,13 +37,13 @@
                 </svg>
                 <div class="mt-4 flex text-sm leading-6 text-gray-600">
                   <label for="cover" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                    <span>Subir archivo</span>
+                    <span>Subir portada</span>
                     <input id="cover" name="cover" type="file" class="sr-only">
                   </label>
                   <p class="pl-1">o arrastra y suelta hasta aquí</p>
                 </div>
                 <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF hasta 10MB</p>
-              </div>
+              </div>              
           </div>
         </div>
         <!-- Otras variables -->
