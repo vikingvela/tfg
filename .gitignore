@@ -1,2 +1,4 @@
 node_modules
 database/
+mysql-8/
+vendor/
