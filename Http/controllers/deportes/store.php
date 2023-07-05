@@ -19,8 +19,7 @@ $existe = $db->query('SELECT nombre FROM DEPORTE WHERE nombre = :nombre', [
 ])->find();
 
 if ($existe) {
-    header('location: /prueba');
-    exit();
+    $errors['nombre'] = 'Este nombre ya se encuentra registrado.';
 } 
     
 // Validar errores

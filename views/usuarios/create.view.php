@@ -45,20 +45,3 @@
   </div>
 </main>
 <?php require base_path('views/partials/footer.php') ?>
-<!--
-id
-nombre
-apellido
-email
-password
-foto
-numero_sesiones
-ultima_sesion
-fecha_alta
-fecha_mod
-fecha_baja
-estado
-creado_por
-modificado_por
-borrado_por
--->

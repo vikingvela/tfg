@@ -1,5 +1,4 @@
 <?php
-
 use Core\App;
 use Core\Validator;
 use Core\Database;
@@ -26,5 +25,5 @@ $db->query('INSERT INTO USUARIO(body, user_id) VALUES(:body, :user_id)', [
 $datos = [(string)$_POST['nombre'], (string)$_POST['apellido'], (string)$_POST['email'], (string)$_POST['password'], (string)$_POST['rol']];
 generarConsultaInsert('USUARIO', $datos);
 
-header('location: /usuarios');
+header('location: /');
 die();
