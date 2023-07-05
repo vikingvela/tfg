@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Response;
+use Core\Database;
 
 function dd($value)
 {
@@ -58,26 +59,28 @@ function old($key, $default = '')
     return Core\Session::get('old')[$key] ?? $default;
 }
 
-function generarConsultaInsert($tabla, $datos)
-{
+function generarConsultaInsert($tabla, $datos){
+    
     // Obtener las claves de los datos (nombres de columnas)
     $columnas = array_keys($datos);
-
+    
     // Filtrar los datos para excluir valores vacíos o nulos
     $datosFiltrados = array_filter($datos, function ($valor) {
         return isset($valor) && $valor !== '';
     });
-
+    
     // Construir la consulta de inserción
     $consulta = "INSERT INTO " . $tabla . " (";
-    $consulta .= implode(", ", array_keys($datosFiltrados));
+    $consulta .= implode(", ", $columnas);
     $consulta .= ") VALUES (";
-
+    
     // Construir los valores de los datos filtrados
     $valores = array_map(function ($valor) {
         // Escapar los valores para evitar ataques de SQL Injection
-        return "'" . addslashes($valor) . "'";
+        return addslashes($valor);
     }, $datosFiltrados);
+
+    // Construir los valores de los datos filtrados
 
     $consulta .= implode(", ", $valores);
     $consulta .= ")";
@@ -87,28 +90,9 @@ function generarConsultaInsert($tabla, $datos)
 
 function getUsuarioIDbyEmail($email){
 
-    $usuario = App::resolve(Database::class)->query('select * from USUARIO where email = :email')->find();
-    $usuario->execute(['email' => $email]);
-    $resultado = $usuario->fetch(PDO::FETCH_ASSOC);
-    dd($resultado['id']); // ID del usuario obtenido de la consulta
-
-    /*
-    if ($resultado) {
-        $idUsuario = $resultado['id']; // ID del usuario obtenido de la consulta
-    
-        // Paso 2: Insertar el registro en la tabla deseada
-        $query = $db->prepare('INSERT INTO tabla (id_usuario, otro_campo) VALUES (:idUsuario, :otroCampo)');
-        $query->execute([
-            'idUsuario' => $idUsuario,
-            'otroCampo' => 'valor_otro_campo'
-        ]);
-    
-        // Si todo fue exitoso, se ha insertado el registro en la base de datos
-        echo 'Registro insertado correctamente.';
-    } else {
-        // No se encontró ningún usuario con el correo electrónico proporcionado
-        echo 'Usuario no encontrado.';
-    }
-    */
-
+    $db = App::resolve(Database::class);
+    $usuarioID = $db->query('SELECT id from USUARIO where email = :email', [
+        'email' => $email
+    ])->find();
+    return $usuarioID['id'];
 }

@@ -17,11 +17,14 @@ if (! empty($errors)) {
         'errors' => $errors
     ]);
 }
-
+/*
 $db->query('INSERT INTO USUARIO(body, user_id) VALUES(:body, :user_id)', [
     'body' => $_POST['body'],
     'user_id' => 1
 ]);
+*/
+$datos = [(string)$_POST['nombre'], (string)$_POST['apellido'], (string)$_POST['email'], (string)$_POST['password'], (string)$_POST['rol']];
+generarConsultaInsert('USUARIO', $datos);
 
 header('location: /usuarios');
 die();

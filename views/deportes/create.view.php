@@ -4,7 +4,7 @@
 <main>
   <div class="">
     <div class="m-5 px-8 py-6 bg-white rounded">      
-      <form action="/prueba" method="POST" enctype="multipart/form-data">
+      <form action="/deportes" method="POST" enctype="multipart/form-data">
         <!-- Nombre del deporte -->
         <div class="container-fluid mx-4 p-4"> 
           <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre del deporte</label>

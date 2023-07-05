@@ -27,6 +27,23 @@ class Database
         return $this;
     }
 
+    public function insert($table, $data)
+    {
+        $fields = array_keys($data);
+
+        $sql = sprintf(
+            'INSERT INTO %s (%s) VALUES (%s)',
+            $table,
+            implode(', ', $fields),
+            ':' . implode(', :', $fields)
+        );
+
+        $this->query($sql, $data);
+
+        return $this;
+    }
+
+
     public function get()
     {
         return $this->statement->fetchAll();

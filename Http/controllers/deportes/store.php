@@ -5,22 +5,25 @@ use Core\Validator;
 use Core\Database;
 
 $db = App::resolve(Database::class);
-
-$nombre = $_POST['nombre'];
-if (isset($_POST['logo']) ? $logo = $_POST['logo'] : $logo = null);
-if (isset($_POST['cover']) ? $cover = $_POST['cover'] : $cover = null);
-$creado_por = getUsuarioIDbyEmail($_POST['usuario']);
-echo 'sesion';
-dd($creado_por);
-echo 'sesion';
-
 $errors = [];
+
 
 // Validar los campos de entrada
 if (! Validator::string($_POST['nombre'], 1, 45)) {
-    $errors['body'] = 'Un nombre de no más de 45 caracteres es necesario.';
-}
+    $errors['nombre'] = 'Un nombre de no más de 45 caracteres es necesario.';
+} 
 
+// Validar que el nombre no se encuentra repetido
+$existe = $db->query('SELECT nombre FROM DEPORTE WHERE nombre = :nombre', [
+    'nombre' => $_POST['nombre']
+])->find();
+
+if ($existe) {
+    header('location: /prueba');
+    exit();
+} 
+    
+// Validar errores
 if (! empty($errors)) {
     return view("deportes/create.view.php", [
         'heading' => 'Crear Deporte',
@@ -28,17 +31,28 @@ if (! empty($errors)) {
     ]);
 }
 
-// Validar que el nombre no se encuentra repetido
-$deporte = $db->query('select * from DEPORTE where nombre = :nombre', [
-    'nombre' => $nombre
-])->find();
+// Si no hay errores, insertar en BD
+$datos = array(
+    'nombre' => $_POST['nombre'],
+    'creado_por' => getUsuarioIDbyEmail($_POST['usuario']),
+    'estado' => 1
+);
+if (isset($_POST['logo'])) $datos['logo'] = $_POST['logo'];
+if (isset($_POST['cover'])) $datos['cover'] = $_POST['cover'];
 
-if ($deporte) {
-    header('location: /');
-    exit();    
-} else {
-    // Insertar en BD
-}
+// Insertar en BD
+/*
+$db->query('INSERT INTO DEPORTE(nombre, logo, cover, creado_por) VALUES(:nombre, :logo, :cover, :creado_por)', [
+    'nombre' => $nombre,
+    'logo' => $logo,
+    'cover' => $cover,
+    'estado' => 1,
+    'creado_por' => $creado_por
+]);
+*/
 
+$db->insert('DEPORTE', $datos);
+
+// Redireccionar a la página de inicio
 header('location: /deportes');
 die();
