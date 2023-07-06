@@ -25,8 +25,15 @@ class Authenticator
     }
 
     public function login($user)
-    {        
+    {
+        $db = App::resolve(Database::class);
+
         $_SESSION['user'] = ['email' => $user['email']];
+
+        $db->update('USUARIO', [
+            'email' => $user['email'],
+            'ultima_sesion' => date('Y-m-d H:i:s')
+        ]);
 
         session_regenerate_id(true);
     }

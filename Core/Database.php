@@ -43,6 +43,23 @@ class Database
         return $this;
     }
 
+    public function update($table, $data)
+    {
+        $fields = array_keys($data);
+
+        $sql = sprintf(
+            'UPDATE %s SET %s WHERE email = :email',
+            $table,
+            implode(', ', array_map(function ($field) {
+                return $field . ' = :' . $field;
+            }, $fields))
+        );
+
+        $this->query($sql, $data);
+
+        return $this;
+    }
+
 
     public function get()
     {

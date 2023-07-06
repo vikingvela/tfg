@@ -7,6 +7,8 @@ use Core\Authenticator;
 
 $db = App::resolve(Database::class);
 
+echo "controller/registration/store.php";
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -19,31 +21,34 @@ if (!Validator::string($password, 7, 255)) {
     $errors['password'] = 'Por favor, introduce una contraseña de al menos 7 caracteres.';
 }
 
+$user = $db->query('select * from USUARIO where email = :email', [
+    'email' => $email
+])->find();
+
+if ($user) {
+    $errors['user'] = 'Correo ya registrado.';
+} else {
+    $db->insert('USUARIO', [
+        'email' => $email, 
+        'password' => password_hash($password, PASSWORD_BCRYPT),
+        'fecha_alta' => date('Y-m-d H:i:s')
+    ]);
+    /*
+    $db->query('INSERT INTO USUARIO(email, password) VALUES(:email, :password)', [
+        'email' => $email,
+        'password' => password_hash($password, PASSWORD_BCRYPT)
+    ]);
+    */
+    
+    $authenticator = new Authenticator();
+    $authenticator->login($user);
+    header('location: /');
+    exit();
+}
+
 if (!empty($errors)) {
     return view('registration/create.view.php', [
         'errors' => $errors
     ]);
 }
 
-$user = $db->query('select * from USUARIO where email = :email', [
-    'email' => $email
-])->find();
-
-$userID = $db->query('select * from USUARIO where id = :id', [
-    'id' => $id
-])->find();
-
-if ($user) {
-    header('location: /');
-    exit();    
-} else {
-    $db->query('INSERT INTO USUARIO(email, password) VALUES(:email, :password)', [
-        'email' => $email,
-        'password' => password_hash($password, PASSWORD_BCRYPT)
-    ]);
-
-    $authenticator = new Authenticator();
-    $authenticator->login($user);
-    header('location: /');
-    exit();
-}
