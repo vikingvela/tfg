@@ -39,17 +39,6 @@ $datos = array(
 if (isset($_POST['logo'])) $datos['logo'] = $_POST['logo'];
 if (isset($_POST['cover'])) $datos['cover'] = $_POST['cover'];
 
-// Insertar en BD
-/*
-$db->query('INSERT INTO DEPORTE(nombre, logo, cover, creado_por) VALUES(:nombre, :logo, :cover, :creado_por)', [
-    'nombre' => $nombre,
-    'logo' => $logo,
-    'cover' => $cover,
-    'estado' => 1,
-    'creado_por' => $creado_por
-]);
-*/
-
 $db->insert('DEPORTE', $datos);
 
 // Redireccionar a la página de inicio

@@ -5,16 +5,20 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
 
+$currentUser = array('email' => $_SESSION['user']['email']);
+$currentUserId = getUsuarioIDbyEmail($currentUser['email']);
+
+/*
 $liga = $db->query('select * from USUARIO where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
+*/
 
-authorize($usuario['user_id'] === $currentUserId);
+//authorize($usuario['user_id'] === $currentUserId);
 
 view("usuarios/edit.view.php", [
     'heading' => 'Editar usuario',
     'errors' => [],
-    'usuario' => $usuario
+    'usuario' => $currentUserId
 ]);

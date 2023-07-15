@@ -9,7 +9,7 @@
         </div>
         <?php if ($_SESSION['user'] ?? false) : ?> 
             <!-- Solo para usuarios -->
-            Esasdasdas
+            SOLO PARA USUARIOS LOGEADOS
         <?php endif ?>
     </div>
 </main>

@@ -89,10 +89,16 @@ function generarConsultaInsert($tabla, $datos){
 }
 
 function getUsuarioIDbyEmail($email){
-
+    
     $db = App::resolve(Database::class);
     $usuarioID = $db->query('SELECT id from USUARIO where email = :email', [
         'email' => $email
     ])->find();
     return $usuarioID['id'];
+}
+function getProfilebyID($id){
+    $db = App::resolve(Database::class);
+    $profile = $db->query('SELECT id from USUARIO where id = :id');
+    dd($profile);
+    return $profile['id'];
 }
