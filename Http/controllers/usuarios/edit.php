@@ -6,7 +6,7 @@ use Core\Database;
 $db = App::resolve(Database::class);
 
 
-$currentUser = array('email' => $_SESSION['user']['email']);
+$currentUser = array('email' => $_SESSION['usuario']['email']);
 $currentUserId = getUsuarioIDbyEmail($currentUser['email']);
 
 /*

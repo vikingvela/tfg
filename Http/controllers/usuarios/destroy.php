@@ -11,7 +11,7 @@ $liga = $db->query('select * from USUARIO where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 
-authorize($usuario['user_id'] === $currentUserId);
+authorize($usuario['creado_por'] === $currentUserId);
 
 $db->query('delete from USUARIO where id = :id', [
     'id' => $_POST['id']

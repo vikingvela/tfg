@@ -11,7 +11,7 @@ $liga = $db->query('select * from DEPORTE where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 
-authorize($deporte['user_id'] === $currentUserId);
+authorize($deporte['creado_por'] === $currentUserId);
 
 $db->query('delete from DEPORTE where id = :id', [
     'id' => $_POST['id']

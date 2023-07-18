@@ -26,7 +26,7 @@ $user = $db->query('select * from USUARIO where email = :email', [
 ])->find();
 
 if ($user) {
-    $errors['user'] = 'Correo ya registrado.';
+    $errors['usuario'] = 'Correo ya registrado.';
 } else {
     $db->insert('USUARIO', [
         'email' => $email, 

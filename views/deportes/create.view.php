@@ -47,7 +47,7 @@
           </div>
         </div>
         <!-- Otras variables -->
-        <?php $usuario=$_SESSION['user']; ?>
+        <?php $usuario=$_SESSION['usuario']; ?>
         <input type="hidden" name="usuario" value=<?= $usuario['email'] ?>>
         <!-- Botones -->
         <div class="mt-6 flex items-center justify-end gap-x-6">

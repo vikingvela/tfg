@@ -11,7 +11,7 @@ $liga = $db->query('select * from DEPORTE where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
 
-authorize($note['user_id'] === $currentUserId);
+authorize($note['creado_por'] === $currentUserId);
 
 view("deportes/edit.view.php", [
     'heading' => 'Editar deporte',

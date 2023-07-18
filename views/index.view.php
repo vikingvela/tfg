@@ -5,7 +5,7 @@
 <main>
     <div class="m-5 px-8 py-6 bg-white rounded grid">
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <p>Hola, <?= $_SESSION['user']['email'] ?? 'invitado' ?>. Bienvenido a la página de inicio.</p>            
+            <p>Hola, <?= $_SESSION['usuario']['email'] ?? 'invitado' ?>. Bienvenido a la página de inicio.</p>            
         </div>
         <?php if ($_SESSION['user'] ?? false) : ?> 
             <!-- Solo para usuarios -->

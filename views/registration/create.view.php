@@ -44,8 +44,8 @@
                         <li class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></li>
                     <?php endif; ?>
 
-                    <?php if (isset($errors['user'])) : ?>
-                        <li class="text-red-500 text-xs mt-2"><?= $errors['user'] ?></li>
+                    <?php if (isset($errors['usuario'])) : ?>
+                        <li class="text-red-500 text-xs mt-2"><?= $errors['usuario'] ?></li>
                     <?php endif; ?>
                 </ul>
             </form>

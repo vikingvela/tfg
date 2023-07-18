@@ -28,7 +28,7 @@ class Authenticator
     {
         $db = App::resolve(Database::class);
 
-        $_SESSION['user'] = ['email' => $user['email']];
+        $_SESSION['usuario'] = ['email' => $user['email']];
 
         $db->update('USUARIO', [
             'email' => $user['email'],
@@ -39,7 +39,7 @@ class Authenticator
     }
     public function loginID($user)
     {        
-        $_SESSION['user'] = ['id' => $user['id']];
+        $_SESSION['usuario'] = ['id' => $user['id']];
 
         session_regenerate_id(true);
     }
