@@ -7,7 +7,6 @@ use Core\Database;
 $db = App::resolve(Database::class);
 $errors = [];
 
-
 // Validar los campos de entrada
 if (! Validator::string($_POST['nombre'], 1, 45)) {
     $errors['nombre'] = 'Un nombre de no más de 45 caracteres es necesario.';
@@ -33,11 +32,10 @@ if (! empty($errors)) {
 // Si no hay errores, insertar en BD
 $datos = array(
     'nombre' => $_POST['nombre'],
-    'creado_por' => getUsuarioIDbyEmail($_POST['usuario']),
-    'estado' => 1
+    'creado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email'])
 );
-if (isset($_POST['logo'])) $datos['logo'] = $_POST['logo'];
-if (isset($_POST['cover'])) $datos['cover'] = $_POST['cover'];
+isset($_POST['logo']) ? $datos['logo'] = $_POST['logo'] : $datos['logo'] = null;
+isset($_POST['cover']) ? $datos['cover'] = $_POST['cover'] : $datos['cover'] = null;
 
 $db->insert('DEPORTE', $datos);
 

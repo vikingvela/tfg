@@ -47,8 +47,6 @@
           </div>
         </div>
         <!-- Otras variables -->
-        <?php $usuario=$_SESSION['usuario']; ?>
-        <input type="hidden" name="usuario" value=<?= $usuario['email'] ?>>
         <!-- Botones -->
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>

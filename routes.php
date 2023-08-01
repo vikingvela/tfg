@@ -33,11 +33,11 @@ $router->post('/deportes', 'deportes/store.php')->only('auth');
 // USUARIOS
 $router->get('/usuarios', 'usuarios/index.php');
 $router->post('/usuarios', 'usuarios/store.php');
-$router->get('/usuarios/create', 'usuarios/create.php');
+$router->get('/usuarios/create', 'usuarios/create.php')->only('guest');
 
-$router->get('/usuario', 'usuario/show.php');
-$router->patch('/usuario', 'usuarios/update.php');
-$router->delete('/usuario', 'usuario/destroy.php');
+$router->get('/usuario', 'usuario/show.php')->only('auth');
+$router->patch('/usuario', 'usuarios/update.php')->only('auth');
+$router->delete('/usuario', 'usuario/destroy.php')->only('auth');
 $router->get('/usuario/edit', 'usuarios/edit.php')->only('auth');
 
 $router->get('/register', 'registration/create.php')->only('guest');

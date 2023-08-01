@@ -43,20 +43,40 @@ class Database
         return $this;
     }
 
+    // Función que dado un array de datos, actualiza la tabla correspondiente
+    public function update1($table, $data)
+    {
+        $fields = array_keys($data);
+        $update_fields = [];
+        foreach ($fields as $field) {
+            $update_fields[] = $field . '=:' . $field; //para cada campo se agrega el formato "campo=:campo" al array
+        }
+        // crear sentencia SQL
+        $sql = sprintf(
+            'UPDATE %s SET %s WHERE %s', 
+            $table,
+            implode(', ', $fields),
+            implode(', ', $update_fields)
+        );
+        $this->query($sql, $fields);
+        return $this;
+    }
+
     public function update($table, $data)
     {
         $fields = array_keys($data);
-
+        $update_fields = [];
+        foreach ($fields as $field) {
+            $update_fields[] = $field . '=:' . $field; // para cada campo se agrega el formato "campo=:campo" al array
+        }
+        // crear sentencia SQL
         $sql = sprintf(
-            'UPDATE %s SET %s WHERE email = :email',
+            'UPDATE %s SET %s WHERE %s', 
             $table,
-            implode(', ', array_map(function ($field) {
-                return $field . ' = :' . $field;
-            }, $fields))
+            implode(', ', $update_fields),
+            implode(' AND ', array_map(fn($field) => "$field=:$field", $fields))
         );
-
-        $this->query($sql, $data);
-
+        $this->query($sql, $data); // Pasamos el array $data que contiene los valores
         return $this;
     }
 
@@ -82,3 +102,4 @@ class Database
         return $result;
     }
 }
+

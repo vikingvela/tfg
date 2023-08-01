@@ -38,7 +38,7 @@
                     </button>
 
                     <!-- Profile dropdown -->
-                    <?php if ($_SESSION['user'] ?? false) : ?>
+                    <?php if ($_SESSION['usuario'] ?? false) : ?>
                         
                         <div class="relative ml-3">
                             <button type="button"

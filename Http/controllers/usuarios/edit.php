@@ -1,21 +1,14 @@
 <?php
 
 use Core\App;
+use Core\Authenticator;
 use Core\Database;
+use Http\Forms\LoginForm;
 
 $db = App::resolve(Database::class);
 
-
 $currentUser = array('email' => $_SESSION['usuario']['email']);
 $currentUserId = getUsuarioIDbyEmail($currentUser['email']);
-
-/*
-$liga = $db->query('select * from USUARIO where id = :id', [
-    'id' => $_GET['id']
-])->findOrFail();
-*/
-
-//authorize($usuario['user_id'] === $currentUserId);
 
 view("usuarios/edit.view.php", [
     'heading' => 'Editar usuario',
