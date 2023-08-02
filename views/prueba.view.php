@@ -4,7 +4,7 @@
 
 <main>
    <div>
-      
+      PRUEBA
    </div>
    <?php dd($_SESSION);?>
 </main>

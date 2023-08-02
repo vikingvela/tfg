@@ -5,6 +5,7 @@ use Core\Database;
 use Core\Validator;
 
 $db = App::resolve(Database::class);
+$errors = [];
 
 // Encontrar la liga correspondiente al id
 $usuario = $db->query('select * from USUARIO where id = :id', [
@@ -12,11 +13,11 @@ $usuario = $db->query('select * from USUARIO where id = :id', [
 ])->findOrFail();
 
 // Autoriza que el usuario actual puede editar
-authorize($_POST['modificado_por'] === $_POST['id'] || $_POST['modificado_por'] > 10);
+if(!authorize(getUsuarioIDbyEmail($_SESSION['usuario']['email']) === $_POST['id'] || getUsuarioIDbyEmail($_SESSION['usuario']['email']) > 10)){
+    $errors['autorizacion'] = 'No tienes autorización para editar este usuario.';
+};
 
 // Validar el formulario
-$errors = [];
-
 if (! Validator::string($_POST['nombre'], 1, 25)) {
     $errors['nombre'] = 'Un nombre de no más de 25 caracteres es necesario.';
 }
@@ -32,17 +33,13 @@ if (count($errors)) {
         'usuario' => $usuario
     ]);
 }
-$db->update('usuario', [
+$db->update('usuario', $_POST['id'],[
     'nombre' => $_POST['nombre'],
     'apellido' => $_POST['apellido'],
-    'modificado_por' => $_POST['modificado_por']
+    'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
+    'fecha_mod' => date('Y-m-d H:i:s')
 ]);
-/*
-$db->query('update usuarios set body = :body where id = :id', [
-    'id' => $_POST['id'],
-    'body' => $_POST['body']
-]);
-*/
-// Redirige al usuario
+
+// Redireccionar a la página de inicio
 header('location: /usuarios');
 die();

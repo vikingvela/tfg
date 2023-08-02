@@ -110,3 +110,13 @@ function getProfilebyEmail($email){
     ])->find();
     return $profile;
 }
+
+function isAdmin($id){
+    $db = App::resolve(Database::class);
+    $admin = $db->query('SELECT * from USUARIO where id = :id',[
+        'id' => $id
+    ])->find();
+    $estado = $admin['estado'];
+    $resultado = $estado >= 10 ? true : false;
+    return $resultado;
+}

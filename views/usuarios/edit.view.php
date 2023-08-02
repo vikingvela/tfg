@@ -7,7 +7,6 @@
 <div class="m-5 px-8 py-6 bg-white rounded grid">
   <form action="/usuario" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="_method" value="PATCH">
-      <input type="hidden" name="modificado_por" value="<?= $usuario ?>">
       <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">

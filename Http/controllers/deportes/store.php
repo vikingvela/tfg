@@ -1,8 +1,8 @@
 <?php
 
 use Core\App;
-use Core\Validator;
 use Core\Database;
+use Core\Validator;
 
 $db = App::resolve(Database::class);
 $errors = [];
@@ -34,8 +34,9 @@ $datos = array(
     'nombre' => $_POST['nombre'],
     'creado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email'])
 );
-isset($_POST['logo']) ? $datos['logo'] = $_POST['logo'] : $datos['logo'] = null;
-isset($_POST['cover']) ? $datos['cover'] = $_POST['cover'] : $datos['cover'] = null;
+
+if(isset($_POST['logo'])) $datos['logo'] = $_POST['logo'];
+if(isset($_POST['cover'])) $datos['cover'] = $_POST['cover'];
 
 $db->insert('DEPORTE', $datos);
 

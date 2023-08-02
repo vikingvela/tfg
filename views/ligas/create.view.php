@@ -4,13 +4,13 @@
 <main>
   <div class="border-b border-gray-900/10 pb-12">
     <div class="m-5 px-8 py-6 bg-white rounded">
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="/ligas" method="POST" enctype="multipart/form-data">
         <!-- Nombre de la Liga -->
         <div class="container-fluid mx-4 p-4">
           <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre de la liga</label>
           <div class="mt-2">
             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                <input type="text" name="nombre" id="nombre" autocomplete="nombre" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Liga femenina fútbol playa 4x4"
+                <input type="text" name="nombre" id="nombre" autocomplete="nombre" required class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" placeholder="Liga femenina fútbol playa 4x4"
                     <?= $_POST['nombre'] ?? '' ?>>
                 <?php if (isset($errors['nombre'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['nombre'] ?></p><?php endif; ?>
             </div>
@@ -20,7 +20,7 @@
         <div class="container-fluid mx-4 p-4">
           <label for="descripcion" class="block text-sm font-medium leading-6 text-gray-900">Descripción de la liga</label>
           <div class="mt-2">
-              <textarea id="descripcion" name="descripcion" rows="2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escibe alguna descripción de la liga. Esta información será pública."></textarea>
+              <textarea id="descripcion" name="descripcion" rows="2" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escibe alguna descripción de la liga. Esta información será pública."></textarea>
               <?php if (isset($errors['descripcion'])) : ?>
                   <p class="text-red-500 text-xs mt-2"><?= $errors['descripcion'] ?></p>
               <?php endif; ?>          
@@ -61,27 +61,26 @@
           <div configuracion class="flex container flex-auto items-center space-between">
             <div label_fechas class="flex-shrink-0"><label for="fechas" class="mx-4 text-gray-500">Fechas de la liga</label></div>
             <div inicio_liga>
-                <input name="fecha_inicio" type="date" class="block flex-1 border border-gray-400 rounded text-gray-900 
+                <input name="fecha_inicio" type="date" required class="block flex-1 border border-gray-400 rounded text-gray-900 
                       placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
             </div>
             <div><span class="mx-4 text-gray-500">hasta</span></div>
             <div fin_liga>
-              <input name="fecha_fin" type="date" class="block flex-1 border border-gray-400 rounded text-gray-900 
+              <input name="fecha_fin" type="date" required class="block flex-1 border border-gray-400 rounded text-gray-900 
                       placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-            </div> 
+            </div>
             <div deporte class="mx-4 text-gray-500 flex-shrink-0">
               <label for="deporte" class="form-label mx-4">Deporte</label>
-              <select class="form-select-md rounded-full form-select-lg rounded-lg border border-gray-400" name="deporte" id="deporte">
-                <option selected>Selecciona un deporte</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
+              <select class="form-select-md rounded-full form-select-lg rounded-lg border border-gray-400" name="deporte" id="deporte" required>
+              <option value="" selected>Seleccione deporte</option>
+              <?php foreach ($deportes_disponibles as $deporte): ?>
+                    <option value="<?= $deporte['id'] ?>"><?= $deporte['nombre'] ?></option>
+                <?php endforeach; ?>
               </select>
             </div>
           </div>
         </div>
         <!-- Otras variables -->
-        <input type="hidden" name="creado_por" value="<?= $usuario['id'] ?>">
         <!-- Botones -->
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>

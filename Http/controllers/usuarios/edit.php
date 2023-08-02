@@ -1,9 +1,7 @@
 <?php
 
 use Core\App;
-use Core\Authenticator;
 use Core\Database;
-use Http\Forms\LoginForm;
 
 $db = App::resolve(Database::class);
 

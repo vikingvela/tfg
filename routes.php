@@ -11,8 +11,8 @@ $router->get('/ligas', 'ligas/index.php');
 $router->get('/liga', 'ligas/show.php');
 $router->delete('/liga', 'ligas/destroy.php');
 
-$router->get('/liga/edit', 'ligas/edit.php');
-$router->patch('/liga', 'ligas/update.php');
+$router->get('/liga/edit', 'ligas/edit.php')->only('auth');
+$router->patch('/liga', 'ligas/update.php')->only('auth');
 
 $router->get('/ligas/create', 'ligas/create.php');
 $router->post('/ligas', 'ligas/store.php');
