@@ -111,11 +111,19 @@ function getProfilebyEmail($email){
     return $profile;
 }
 
-function isAdmin($id){
+function isAdmin($user){
     $db = App::resolve(Database::class);
-    $admin = $db->query('SELECT * from USUARIO where id = :id',[
-        'id' => $id
-    ])->find();
+    
+    if(is_int($user)){
+        $admin = $db->query('SELECT * from USUARIO where id = :id',[
+            'id' => $user
+        ])->find();
+    } else {
+        $admin = $db->query('SELECT * from USUARIO where email = :email',[
+            'email' => $user['email']
+        ])->find();
+    }
+
     $estado = $admin['estado'];
     $resultado = $estado >= 10 ? true : false;
     return $resultado;

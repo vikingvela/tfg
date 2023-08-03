@@ -1,7 +1,7 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php')?>
-
+<?php //dd($deportes_disponibles['id']);?>
 <main>
   <div class="border-b border-gray-900/10 pb-12">
     <div class="m-5 px-8 py-6 bg-white rounded">
@@ -26,7 +26,7 @@
         <div class="container-fluid mx-4 p-4">
           <label for="descripcion" class="block text-sm font-medium leading-6 text-gray-900">Descripción de la liga</label>
           <div class="mt-2">
-              <textarea id="descripcion" name="descripcion" rows="2" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escibe alguna descripción de la liga. Esta información será pública."></textarea>
+              <textarea id="descripcion" name="descripcion" rows="2" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Escibe alguna descripción de la liga. Esta información será pública."><?=$liga['descripcion']?></textarea>
               <?php if (isset($errors['descripcion'])) : ?>
                   <p class="text-red-500 text-xs mt-2"><?= $errors['descripcion'] ?></p>
               <?php endif; ?>          
@@ -67,21 +67,22 @@
           <div configuracion class="flex container flex-auto items-center space-between">
             <div label_fechas class="flex-shrink-0"><label for="fechas" class="mx-4 text-gray-500">Fechas de la liga</label></div>
             <div inicio_liga>
-                <input name="fecha_inicio" type="date" required class="block flex-1 border border-gray-400 rounded text-gray-900 
+                <input name="fecha_inicio" type="date" required value="<?= $liga['fecha_inicio']?>" class="block flex-1 border border-gray-400 rounded text-gray-900 
                       placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
             </div>
             <div><span class="mx-4 text-gray-500">hasta</span></div>
             <div fin_liga>
-              <input name="fecha_fin" type="date" required class="block flex-1 border border-gray-400 rounded text-gray-900 
+              <input name="fecha_fin" type="date" required value="<?= $liga['fecha_fin']?>" class="block flex-1 border border-gray-400 rounded text-gray-900 
                       placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
             </div>
             <div deporte class="mx-4 text-gray-500 flex-shrink-0">
               <label for="deporte" class="form-label mx-4">Deporte</label>
               <select class="form-select-md rounded-full form-select-lg rounded-lg border border-gray-400" name="deporte" id="deporte" required>
-              <option value="" selected>Seleccione deporte</option>
-              <?php foreach ($deportes_disponibles as $deporte): ?>
-                    <option value="<?= $deporte['id'] ?>"><?= $deporte['nombre'] ?></option>
-                <?php endforeach; ?>
+                  <?php foreach ($deportes_disponibles as $deporte): ?>
+                      <option value="<?= $deporte['id']; ?>" <?= $deporte['id'] == $liga['deporte_id'] ? 'selected' : ''; ?>>
+                          <?= $deporte['nombre']; ?>
+                      </option>
+                  <?php endforeach; ?>
               </select>
             </div>
           </div>

@@ -25,7 +25,7 @@ if ($existe) {
     $errors['nombre'] = 'Este nombre ya se encuentra registrado.';
 }
 
-if (! empty($errors)) {
+if (!empty($errors)) {
     return view("ligas/create", [
         'heading' => 'Crear Liga',
         'errors' => $errors

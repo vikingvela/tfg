@@ -33,7 +33,7 @@ if (count($errors)) {
         'usuario' => $usuario
     ]);
 }
-$db->update('usuario', $_POST['id'],[
+$db->updateID('usuario', $_POST['id'],[
     'nombre' => $_POST['nombre'],
     'apellido' => $_POST['apellido'],
     'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),

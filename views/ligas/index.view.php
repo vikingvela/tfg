@@ -1,6 +1,14 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
+<?php 
+    if(!empty($_SESSION)) {
+        $usuarioID = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
+        $ligasAdmin = array_filter($ligas, function($liga) use ($usuarioID) {
+            return $liga['creado_por'] == $usuarioID;
+        });
+    }
+?>
 <!-- dd($_SESSION['usuario']['email']) -->
 <main>
     <div class="m-5 px-8 py-6 bg-white rounded grid">
@@ -11,7 +19,7 @@
             <!-- Solo para usuarios -->
             
             <h2>Ligas administradas por el usuario</h2>
-            <?php if (isset($ligasAdmin) && !empty($ligasAdmin)) { ?>    
+            <?php if (!empty($ligasAdmin)) { ?>    
                 <table>
                     <thead>
                         <tr>

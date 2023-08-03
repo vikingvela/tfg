@@ -2,11 +2,11 @@
 
 namespace Core\Middleware;
 
-class Authenticated
+class Admin
 {
     public function handle()
     {
-        if (!$_SESSION['usuario'] ?? false) {
+      if (!isAdmin($_SESSION['usuario'])) {
             header('location: /');
             exit();
         }

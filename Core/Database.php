@@ -35,7 +35,7 @@ class Database{
 
         return $this;
     }
-    public function update($table, $id, $data){
+    public function updateID($table, $id, $data){
         $data['id'] = $id;
         $fields = array_keys($data);
         $update_fields = [];    
@@ -51,6 +51,24 @@ class Database{
         );
 
         $this->query($sql, $data);
+        return $this;
+    }
+
+    public function update($table, $data)
+    {
+        $fields = array_keys($data);
+        $update_fields = [];
+        foreach ($fields as $field) {
+            $update_fields[] = $field . '=:' . $field; // para cada campo se agrega el formato "campo=:campo" al array
+        }
+        // crear sentencia SQL
+        $sql = sprintf(
+            'UPDATE %s SET %s WHERE %s', 
+            $table,
+            implode(', ', $update_fields),
+            implode(' AND ', array_map(fn($field) => "$field=:$field", $fields))
+        );
+        $this->query($sql, $data); // Pasamos el array $data que contiene los valores
         return $this;
     }
 
