@@ -4,38 +4,46 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
-$db = App::resolve(Database::class);
+echo "deportes/update.php";
 
-$currentUserId = 222221;
+$db = App::resolve(Database::class);
+$errors = [];
 
 // Encontrar la liga correspondiente al id
-$liga = $db->query('select * from DEPORTE where id = :id', [
+$deporte = $db->query('SELECT * from DEPORTE where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 
-// Autoriza que el usuario actual puede editar la liga
-authorize($deporte['user_id'] === $currentUserId);
 
 // Validar el formulario
-$errors = [];
-
-if (! Validator::string($_POST['body'], 1, 10)) {
-    $errors['body'] = 'Un texto de no más de 1.000 caracteres es necesario.';
+if (! Validator::string($_POST['nombre'], 1, 45)) {
+    $errors['nombre'] = 'Un nombre de no más de 45 caracteres es necesario.';
 }
 
-// Si no hay errores en la validación, actualizar la tabla de ligas
+// Validar que el nombre no se encuentra repetido
+$existe = $db->query('SELECT nombre FROM DEPORTE WHERE nombre = :nombre AND id != :id', [
+    'nombre' => $_POST['nombre'],
+    'id' => $_POST['id']
+])->find();
+if ($existe) {
+    $errors['nombre'] = 'Este nombre ya se encuentra registrado.';
+}
+
+// Si no hay errores en la validación, actualizar la tabla de deportes
 if (count($errors)) {
     return view('deportes/edit.view.php', [
-        'heading' => 'Editar deportes',
+        'heading' => 'Editar deporte',
         'errors' => $errors,
         'deporte' => $deporte
     ]);
 }
 
-$db->query('update deportes set body = :body where id = :id', [
-    'id' => $_POST['id'],
-    'body' => $_POST['body']
-]);
+$datos = array(
+    'nombre' => $_POST['nombre'],
+    'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
+);
+$db->updateID('DEPORTE', $_POST['id'], $datos);
+
 
 // Redirige al usuario
 header('location: /deportes');

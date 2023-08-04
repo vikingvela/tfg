@@ -5,8 +5,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
-
 $usuario = $db->query('select * from USUARIO where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();

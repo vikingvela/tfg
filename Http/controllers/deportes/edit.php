@@ -3,18 +3,17 @@
 use Core\App;
 use Core\Database;
 
+echo "deportes/edit.php";
+
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
-
-$liga = $db->query('select * from DEPORTE where id = :id', [
+// Encontrar el deporte correspondiente al id
+$deporte = $db->query('SELECT * from DEPORTE where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
-
-authorize($note['creado_por'] === $currentUserId);
 
 view("deportes/edit.view.php", [
     'heading' => 'Editar deporte',
     'errors' => [],
-    'ldeporte' => $deporte
+    'deporte' => $deporte
 ]);

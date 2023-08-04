@@ -1,11 +1,15 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php')?>
-<?php //dd($deportes_disponibles['id']);?>
+<?="ligas/edit.view.php"?>
+
 <main>
   <div class="border-b border-gray-900/10 pb-12">
     <div class="m-5 px-8 py-6 bg-white rounded">
-      <form action="/ligas" method="POST" enctype="multipart/form-data">
+      <form action="/liga" method="POST" enctype="multipart/form-data">
+        <!-- Otras variables -->
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="id" value="<?= $liga['id'] ?>">
         <!-- Nombre de la Liga -->
         <div class="container-fluid mx-4 p-4">
           <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre de la liga</label>
@@ -16,7 +20,6 @@
                     id="nombre" 
                     autocomplete="nombre" 
                     required 
-                    placeholder="Nombre de la liga"
                     value="<?=isset($liga['nombre']) ? $liga['nombre'] : "" ?>">
                 <?php if (isset($errors['nombre'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['nombre'] ?></p><?php endif; ?>
             </div>
@@ -87,7 +90,6 @@
             </div>
           </div>
         </div>
-        <!-- Otras variables -->
         <!-- Botones -->
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>

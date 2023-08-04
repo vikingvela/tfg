@@ -4,18 +4,20 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
+echo "usuarios/update.php";
+
 $db = App::resolve(Database::class);
 $errors = [];
 
-// Encontrar la liga correspondiente al id
+// Encontrar el usuario correspondiente al id
 $usuario = $db->query('select * from USUARIO where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 
-// Autoriza que el usuario actual puede editar
-if(!authorize(getUsuarioIDbyEmail($_SESSION['usuario']['email']) === $_POST['id'] || getUsuarioIDbyEmail($_SESSION['usuario']['email']) > 10)){
-    $errors['autorizacion'] = 'No tienes autorización para editar este usuario.';
-};
+// Autoriza que el usuario actual puede editar el usuario
+$usuario = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
+if(!authorize($liga['creado_por'] ===  $usuario || isAdmin($usuario))) 
+    $errors['autorizacion'] = 'No tienes autorización para editar este usuario.'; 
 
 // Validar el formulario
 if (! Validator::string($_POST['nombre'], 1, 25)) {

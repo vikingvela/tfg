@@ -1,6 +1,9 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
+<?="deportes/create.view.php"?>
+
+
 <main>
   <div class="">
     <div class="m-5 px-8 py-6 bg-white rounded">      

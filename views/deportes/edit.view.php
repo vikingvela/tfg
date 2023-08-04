@@ -1,66 +1,70 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
+<?="deportes/edit.view.php"?>
 
 <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <div class="md:grid md:grid-cols-3 md:gap-6">
-            <div class="mt-5 md:col-span-2 md:mt-0">
-                <form method="POST" action="/liga">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <input type="hidden" name="id" value="<?= $liga['id'] ?>">
-
-                    <div class="shadow sm:overflow-hidden sm:rounded-md">
-                        <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
-                            <div>
-                                <label
-                                    for="body"
-                                    class="block text-sm font-medium text-gray-700"
-                                >Body</label>
-
-                                <div class="mt-1">
-                                    <textarea
-                                        id="body"
-                                        name="body"
-                                        rows="3"
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                        placeholder="Here's an idea for a liga..."
-                                    ><?= $liga['body'] ?></textarea>
-
-                                    <?php if (isset($errors['body'])) : ?>
-                                        <p class="text-red-500 text-xs mt-2"><?= $errors['body'] ?></p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-x-4 justify-end items-center">
-                            <button type="button" class="text-red-500 mr-auto" onclick="document.querySelector('#delete-form').submit()">Borrar</button>
-
-                            <a
-                                href="/ligas"
-                                class="inline-flex justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Cancel
-                            </a>
-
-                            <button
-                                type="submit"
-                                class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Update
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <form id="delete-form" class="hidden" method="POST" action="/liga">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="id" value="<?= $liga['id'] ?>">
-                </form>
+  <div class="">
+    <div class="m-5 px-8 py-6 bg-white rounded">      
+      <form action="/deportes" method="POST" enctype="multipart/form-data">
+        <!-- Otras variables -->
+        <input type="hidden" name="_method" value="PATCH">
+        <input type="hidden" name="id" value="<?= $deporte['id'] ?>">  
+        <!-- Nombre del deporte -->
+        <div class="container-fluid mx-4 p-4"> 
+          <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre del deporte</label>
+          <div class="mt-2">
+            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                <input class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    autocomplete="nombre"
+                    required
+                    value="<?=isset($deporte['nombre']) ? $deporte['nombre'] : "" ?>">
+                <?php if (isset($errors['nombre'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['nombre'] ?></p><?php endif; ?>
             </div>
+          </div>
         </div>
+        <!-- Logo -->   
+        <div class="container-fluid mx-4 p-4">
+          <label class="block text-sm font-medium leading-6 text-gray-900">Logo</label>
+          <div class="mt-2 flex items-center gap-x-3">
+            <svg for="logo" class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+            </svg>
+            <input type="file" id="logo" name="logo" class="sr-only">
+            <label for="logo" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+            <span class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Subir</span>
+          </div>
+        </div>
+        <!-- Portada -->
+        <div class="container-fluid mx-4 p-4 border-b border-gray-900/10 pb-12">
+          <label for="cover" class="block text-sm font-medium leading-6 text-gray-900">Foto de portada</label>
+            <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+              <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+                </svg>
+                <div class="mt-4 flex text-sm leading-6 text-gray-600">
+                  <label for="cover" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                    <span>Subir portada</span>
+                    <input id="cover" name="cover" type="file" class="sr-only">
+                  </label>
+                  <p class="pl-1">o arrastra y suelta hasta aquí</p>
+                </div>
+                <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF hasta 10MB</p>
+              </div>              
+          </div>
+        </div>
+        <!-- Botones -->
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>
+          <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Guardar</button>
+        </div>
+      </form>
     </div>
+  </div>
 </main>
 
 <?php require base_path('views/partials/footer.php') ?>

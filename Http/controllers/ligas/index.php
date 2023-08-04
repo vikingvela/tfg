@@ -3,16 +3,20 @@
 use Core\App;
 use Core\Database;
 
+echo "ligas/index.php";
+
 $db = App::resolve(Database::class);
-//$usuarioID = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
-//$ligas = $db->query('select * from LIGA')->get();
 
 $ligas = $db->query('SELECT * FROM LIGA')->get();
-//!empty($_SESSION) ? $ligasAdmin = $db->query('select * from LIGA where creado_por = ' . getUsuarioIDbyEmail($_SESSION['usuario']['email']))->get() : $ligasAdmin = [];
+$usuarioID = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
+$ligasAdmin = array_filter($ligas, function($liga) use ($usuarioID) {
+    return $liga['creado_por'] == $usuarioID;
+});
 $deportes = $db->query('select * from DEPORTE')->get();
 
 view("ligas/index.view.php", [
     'heading' => 'Ligas',
     'ligas' => $ligas,
+    'ligasAdmin' => $ligasAdmin,
     'deportes' => $deportes
 ]);

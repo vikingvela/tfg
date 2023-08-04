@@ -3,11 +3,13 @@
 use Core\App;
 use Core\Database;
 
+echo "deportes/index.php";
+
 $db = App::resolve(Database::class);
-$deportes = $db->query('select * from DEPORTE')->get();
-//$ligas = $db->query('select * from LIGA where user_id = 1')->get();
+
+$deportes = $db->query('SELECT * FROM DEPORTE')->get();
 
 view("deportes/index.view.php", [
     'heading' => 'Deportes',
-    'Deportes' => $deportes
+    'deportes' => $deportes
 ]);

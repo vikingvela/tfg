@@ -3,6 +3,8 @@
 use Core\App;
 use Core\Database;
 
+echo "ligas/destroy.php"
+
 $db = App::resolve(Database::class);
 
 $currentUserId = 1;

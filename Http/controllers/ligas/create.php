@@ -4,6 +4,8 @@ use Core\App;
 use Core\Database;
 use Core\Session;
 
+echo "ligas/create.php";
+
 $db = App::resolve(Database::class);
 //$ligas = $db->query('select * from LIGA')->get();
 //$ligas = $db->query('select * from LIGA where user_id = 1')->get();

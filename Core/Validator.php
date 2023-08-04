@@ -15,4 +15,9 @@ class Validator
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
+    public static function fecha($value, $format = 'Y-m-d')
+    {
+        $date = date_parse_from_format($format, $value);
+        return $date['error_count'] === 0 && checkdate($date['month'], $date['day'], $date['year']);
+    }
 }
