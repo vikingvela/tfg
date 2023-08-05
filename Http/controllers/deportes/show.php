@@ -5,7 +5,7 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
+echo "deportes/show.php";
 
 $liga = $db->query('select * from DEPORTE where id = :id', [
     'id' => $_GET['id']

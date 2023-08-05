@@ -9,7 +9,6 @@
                      alt="Your Company">
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Entrar</h2>
             </div>
-
             <form class="mt-8 space-y-6" action="/session" method="POST">
                 <div class="-space-y-px rounded-md shadow-sm">
                     <div>
@@ -19,7 +18,6 @@
                                placeholder="Email"
                                value="<?= old('email') ?>">
                     </div>
-
                     <div>
                         <label for="password" class="sr-only">Contraseña</label>
                         <input id="password" name="password" type="password" autocomplete="contraseña" required
@@ -27,14 +25,12 @@
                                placeholder="Contraseña">
                     </div>
                 </div>
-
                 <div>
                     <button type="submit"
                             class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         Entrar
                     </button>
                 </div>
-
                 <ul>
                     <?php if (isset($errors['email'])) : ?>
                         <li class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></li>

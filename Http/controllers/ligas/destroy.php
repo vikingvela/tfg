@@ -3,7 +3,7 @@
 use Core\App;
 use Core\Database;
 
-echo "ligas/destroy.php"
+echo "ligas/destroy.php";
 
 $db = App::resolve(Database::class);
 

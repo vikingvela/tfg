@@ -18,6 +18,15 @@ $router->get('/liga/edit', 'ligas/edit.php')->only('auth');
 $router->patch('/liga', 'ligas/update.php')->only('auth');
 
 
+// EQUIPOS
+$router->get('/equipos', 'equipos/index.php');
+$router->get('/equipos/create', 'equipos/create.php')->only('auth');
+$router->post('/equipos', 'equipos/store.php')->only('auth');
+
+$router->get('/equipo', 'equipos/show.php');
+$router->delete('/equipo', 'equipos/destroy.php')->only('auth');
+$router->get('/equipo/edit', 'equipos/edit.php')->only('auth');
+$router->patch('/equipo', 'equipos/update.php')->only('auth');
 
 // DEPORTES
 $router->get('/deportes', 'deportes/index.php')->only('admin');

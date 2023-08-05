@@ -2,7 +2,7 @@
 use Core\App;
 use Core\Validator;
 use Core\Database;
-echo "controller/usuarios/store.php";
+echo "usuarios/store.php";
 
 $db = App::resolve(Database::class);
 $errors = [];

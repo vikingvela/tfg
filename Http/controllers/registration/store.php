@@ -7,7 +7,7 @@ use Core\Authenticator;
 
 $db = App::resolve(Database::class);
 
-echo "controller/registration/store.php";
+echo "registration/store.php";
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -33,13 +33,7 @@ if ($user) {
         'password' => password_hash($password, PASSWORD_BCRYPT),
         'fecha_alta' => date('Y-m-d H:i:s')
     ]);
-    /*
-    $db->query('INSERT INTO USUARIO(email, password) VALUES(:email, :password)', [
-        'email' => $email,
-        'password' => password_hash($password, PASSWORD_BCRYPT)
-    ]);
-    */
-    
+
     $authenticator = new Authenticator();
     $authenticator->login($user);
     header('location: /');
