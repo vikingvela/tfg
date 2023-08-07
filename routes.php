@@ -12,7 +12,7 @@ $router->get('/ligas', 'ligas/index.php');
 $router->get('/ligas/create', 'ligas/create.php')->only('auth');
 $router->post('/ligas', 'ligas/store.php')->only('auth');
 
-$router->get('/liga', 'ligas/show.php');
+$router->get('/liga/show', 'ligas/show.php');
 $router->delete('/liga', 'ligas/destroy.php')->only('auth');
 $router->get('/liga/edit', 'ligas/edit.php')->only('auth');
 $router->patch('/liga', 'ligas/update.php')->only('auth');
@@ -23,7 +23,7 @@ $router->get('/equipos', 'equipos/index.php');
 $router->get('/equipos/create', 'equipos/create.php')->only('auth');
 $router->post('/equipos', 'equipos/store.php')->only('auth');
 
-$router->get('/equipo', 'equipos/show.php');
+$router->get('/equipo/show', 'equipos/show.php');
 $router->delete('/equipo', 'equipos/destroy.php')->only('auth');
 $router->get('/equipo/edit', 'equipos/edit.php')->only('auth');
 $router->patch('/equipo', 'equipos/update.php')->only('auth');

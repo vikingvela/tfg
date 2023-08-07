@@ -7,15 +7,17 @@ echo "ligas/show.php";
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 1;
-
-$liga = $db->query('select * from ligas where id = :id AND estado > 0', [
+$liga = $db->query('SELECT * from liga where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
 
-authorize($liga['creado_por'] === $currentUserId);
+$equipos = $db->query('SELECT * from equipo where liga_id = :id', [
+    'id' => $_GET['id']
+])->get();
+
 
 view("ligas/show.view.php", [
-    'heading' => 'liga',
+    'heading' => 'Información sobre la liga',
+    'equipos' => $equipos,
     'liga' => $liga
 ]);

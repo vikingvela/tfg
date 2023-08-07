@@ -128,3 +128,11 @@ function isAdmin($user){
     $resultado = $estado >= 10 ? true : false;
     return $resultado;
 }
+
+function getNombrebyID($id, $tabla){
+    $db = App::resolve(Database::class);
+    $nombre = $db->query('SELECT nombre from ' . $tabla . ' where id = :id',[
+        'id' => $id
+    ])->find();
+    return $nombre['nombre'];
+}

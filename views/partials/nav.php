@@ -18,14 +18,14 @@
                         <a href="/contacto" 
                             class="<?= urlIs('/contacto') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacto</a>                        
                         <!-- Botones exclusivos si el usuario se encuentra logeado -->
-                        <?php if ($_SESSION['usuario'] ?? false) : ?> 
+                        <?php if (!empty($_SESSION)){ ?> 
                             <!-- Botones -->
-                        <?php endif ?>
-                        <!-- Botones exclusivos si el usuario es administrador -->
-                        <?php if (isAdmin($_SESSION['usuario'] ?? false)) : ?> 
-                            <a href="/deportes" 
-                            class="<?= urlIs('/deportes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Deportes</a>                        
-                        <?php endif; ?>
+                            <!-- Botones exclusivos si el usuario es administrador -->
+                            <?php if (isAdmin($_SESSION['usuario'])) { ?> 
+                                <a href="/deportes" 
+                                class="<?= urlIs('/deportes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Deportes</a>                        
+                            <?php } ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

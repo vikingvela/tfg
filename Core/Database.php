@@ -4,23 +4,15 @@ namespace Core;
 
 use PDO;
 
-class Database{
+class Database {
     public $connection;
     public $statement;
-
     public function __construct($config, $username = 'root', $password = ''){   // web/o2mRm734%
         $dsn = 'mysql:' . http_build_query($config, '', ';');
 
         $this->connection = new PDO($dsn, $username, $password, [
            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
-    }
-    public function query($query, $params = []){
-        $this->statement = $this->connection->prepare($query);
-
-        $this->statement->execute($params);
-
-        return $this;
     }
     public function insert($table, $data){
         $fields = array_keys($data);
@@ -33,6 +25,10 @@ class Database{
 
         $this->query($sql, $data);
 
+        return $this;
+    }    public function query($query, $params = []){
+        $this->statement = $this->connection->prepare($query);
+        $this->statement->execute($params);
         return $this;
     }
     public function updateID($table, $id, $data){

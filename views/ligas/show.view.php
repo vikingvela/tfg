@@ -4,17 +4,32 @@
 <?="ligas/show.view.php"?>
 
 <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <p class="mb-6">
-            <a href="/ligas" class="text-blue-500 underline">go back...</a>
-        </p>
-
-        <p><?= htmlspecialchars($liga['body']) ?></p>
-
-        <footer class="mt-6">
-            <a href="/liga/edit?id=<?= $liga['id'] ?>" class="inline-flex justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Editar</a>
-        </footer>
+  <div class="border-b border-gray-900/10 pb-12">
+    <div class="flex-container flex-col m-5 px-8 py-6 bg-white rounded items-center gap-10">
+      <div cover class="mx-2 p-2"></div>
+      <div liga class="flex justify-between w-full mx-4 p-4 text-5xl">
+        <?=isset($liga['nombre']) ? $liga['nombre'] : "" ?>
+        <?=isset($liga['logo']) ? $liga['logo'] : "" ?>
+      </div>
+      <div descripcion class="mx-4 p-4 text-base"><?=isset($liga['descripcion']) ? $liga['descripcion'] : "" ?></div>
+      <div fechas class="mx-4 p-4 text-lg">Liga de <?=isset($liga['deporte_id']) ? getNombrebyID($liga['deporte_id'],'DEPORTE') : "deporte" ?> celebrada entre <?=date('d-m-Y', strtotime($liga['fecha_inicio']))?> y <?=date('d-m-Y', strtotime($liga['fecha_fin']))?>.</div>
+      <div equipos>
+        <div class="mx-4 p-4 text-lg">Equipos participantes:</div>
+        <div class="flex justify-between w-full mx-4 p-4 text-5xl">
+          <?php foreach($equipos as $equipo): ?>
+            <div class="flex flex-col items-center">
+              <div class="flex justify-center items-center w-20 h-20 bg-gray-200 rounded-full">
+                <img src="<?=isset($equipo['logo']) ? $equipo['logo'] : "" ?>" alt="Logo del equipo" class="w-16 h-16">
+              </div>
+              <div class="text-base"><?=isset($equipo['nombre']) ? $equipo['nombre'] : "" ?></div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <div clasificacion></div>
+      <div resultados></div>
     </div>
+  </div>
 </main>
 
 <?php require base_path('views/partials/footer.php') ?>

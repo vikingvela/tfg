@@ -21,7 +21,7 @@ if(!authorize($liga['creado_por'] ===  $usuario || isAdmin($usuario)))
     $errors['autorizacion'] = 'No tienes autorización para editar esta liga.'; 
 
 view("ligas/edit.view.php", [
-    'heading' => 'Información sobre la liga',
+    'heading' => 'Editar información de la liga',
     'errors' => [],
     'deportes_disponibles' => $deportes_disponibles,
     'liga' => $liga
