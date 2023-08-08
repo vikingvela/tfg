@@ -7,9 +7,7 @@
         <p class="mb-6">
             <a href="/ligas" class="text-blue-500 underline">go back...</a>
         </p>
-
         <p><?= htmlspecialchars($liga['body']) ?></p>
-
         <footer class="mt-6">
             <a href="/liga/edit?id=<?= $liga['id'] ?>" class="inline-flex justify-center rounded-md border border-transparent bg-gray-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Editar</a>
         </footer>

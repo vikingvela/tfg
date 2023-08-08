@@ -12,6 +12,9 @@ $usuarioID = null;
 
 $equipos = $db->query('SELECT * FROM equipo')->get();
 $ligas = $db->query('SELECT * FROM LIGA')->get();
+$equipos_ligas = $db->query('SELECT * FROM EQUIPOS_LIGAS')->get();
+$deportes = $db->query('SELECT * from DEPORTE')->get();
+
 
 // Se asocian a las variables $equiposAdmin y $usuarioID los equipos creados por el usuario logeado, y se sobreescribe la variable $equipos con los equipos que están activos
 if(!empty($_SESSION)) {
@@ -20,15 +23,13 @@ if(!empty($_SESSION)) {
         return $equipo['creado_por'] == $usuarioID;
     });
 }
-// Filstra los equipos que tengan el campo 'estado'>1
-$equipos = array_filter($equipos, function($equipo) {
-    return $equipo['estado'] > 1;
-});
 
 view("equipos/index.view.php", [
-    'heading' => 'equipos',
+    'heading' => 'Equipos',
     'equipos' => $equipos,
     'equiposAdmin' => $equiposAdmin,
     'ligas' => $ligas,
+    'deportes' => $deportes,
+    'equipos_ligas' => $equipos_ligas,
     'usuarioID' =>  $usuarioID
 ]);

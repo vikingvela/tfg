@@ -7,6 +7,7 @@ class Middleware
     public const MAP = [
         'guest' => Guest::class,
         'auth' => Authenticated::class,
+        'gestor' => Gestor::class,
         'admin' => Admin::class
     ];
 

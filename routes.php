@@ -9,13 +9,13 @@ $router->post('/prueba', 'prueba.php');
 
 // LIGAS
 $router->get('/ligas', 'ligas/index.php');
-$router->get('/ligas/create', 'ligas/create.php')->only('auth');
+$router->get('/ligas/create', 'ligas/create.php')->only('gestor');
 $router->post('/ligas', 'ligas/store.php')->only('auth');
 
 $router->get('/liga/show', 'ligas/show.php');
-$router->delete('/liga', 'ligas/destroy.php')->only('auth');
-$router->get('/liga/edit', 'ligas/edit.php')->only('auth');
-$router->patch('/liga', 'ligas/update.php')->only('auth');
+$router->delete('/liga', 'ligas/destroy.php')->only('gestor');
+$router->get('/liga/edit', 'ligas/edit.php')->only('gestor');
+$router->patch('/liga', 'ligas/update.php')->only('gestor');
 
 
 // EQUIPOS
