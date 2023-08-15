@@ -53,6 +53,11 @@ if(isset($_POST['fecha_inicio'])) $datos['fecha_inicio'] = $_POST['fecha_inicio'
 if(isset($_POST['fecha_fin'])) $datos['fecha_fin'] = $_POST['fecha_fin'];
 
 $db->insert('LIGA', $datos);
+$db->insert('LIGA_USUARIO', [
+    'liga_id' => $db->lastInsertId(),
+    'usuario_id' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
+    'deporte' => 'deporte'
+]);
 
 header('location: /ligas');
 die();

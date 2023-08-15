@@ -11,7 +11,7 @@ $liga = $db->query('SELECT * from liga where id = :id', [
     'id' => $_GET['id']
 ])->findOrFail();
 
-$equipos = $db->query('SELECT * from equipo where liga_id = :id', [
+$equipos = $db->query('SELECT * from equipos_ligas where liga_id = :id', [
     'id' => $_GET['id']
 ])->get();
 

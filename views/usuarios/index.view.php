@@ -1,132 +1,155 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
+<?="usuarios/index.view.php"?>
+
+<style>
+    .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    /* otros estilos */
+    }
+
+    .tabla th {
+        padding: 0.75rem 1.25rem; /* px-5 py-3 */
+        border-bottom-width: 2px; /* border-b-2 */
+        border-color: #E5E7EB; /* border-gray-200 */
+        background-color: #F3F4F6; /* bg-gray-100 */
+        text-align: left; /* text-left */
+        font-size: 0.75rem; /* text-xs */
+        font-weight: 600; /* font-semibold */
+        color: #4B5563; /* text-gray-600 */
+        letter-spacing: 0.05em; /* tracking-wider */
+        text-transform: uppercase; /* uppercase */
+    }
+    /* Estilos para las celdas <td> */
+    .tabla td {
+        padding: 1.25rem; /* px-5 py-5 */
+        border-bottom-width: 1px; /* border-b */
+        border-color: #E5E7EB; /* border-gray-200 */
+        background-color: #FFFFFF; /* bg-white */
+        font-size: 0.875rem; /* text-sm */
+        color: #4A5568; /* text-gray-700 */
+    }
+</style>
 
 <main>
-    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <ul>
-            <?php foreach ($ligas as $liga) : ?>
-                <li>
-                    <a href="/liga?id=<?= $liga['id'] ?>" class="text-blue-500 hover:underline">
-                        <?= htmlspecialchars($liga['body']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-
-        <div class="card">
-            <div class="card-header">
-                Ligas en las que participas:
-            </div>
-            <div class="card-body">
-                <div class="table-responsive-sm">
-                    <table class="table table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Column 1</th>
-                                <th scope="col">Column 2</th>
-                                <th scope="col">Column 3</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="">
-                                <td scope="row">R1C1</td>
-                                <td>R1C2</td>
-                                <td>R1C3</td>
-                            </tr>
-                            <tr class="">
-                                <td scope="row">Item</td>
-                                <td>Item</td>
-                                <td>Item</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-
-                <h4 class="card-title">Title</h4>
-                <p class="card-text">Text</p>
-            </div>
-            <div class="card-footer text-muted">
-                Footer
-            </div>
-        </div>
-
-        <div> <!-- Mis equipos -->
-            <div class="text-xl">
-                <p>
-                    Ligas en las que participas:
-                </p>
-            </div>
-            <section class="ftco-section">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <!--
-                        <div class="col-md-6 text-center mb-5">
-                            <h3 class="heading-section">Table #07</h3>
-                        </div>
-                        --> 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-wrap">
-                                <table class="table table-bordered table-dark table-hover"; width="70%" >
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="adc0ccdfc6c2d9d9c2edc8c0ccc4c183cec2c0">[email&#160;protected]</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bfd5dedcd0ddcbd7d0cdd1cbd0d1ffdad2ded6d391dcd0d2">[email&#160;protected]</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a5c9c4d7d7dcc7ccd7c1e5c0c8c4ccc98bc6cac8">[email&#160;protected]</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>John</td>
-                                            <td>Doe</td>
-                                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="39535651575d565c795c54585055175a5654">[email&#160;protected]</a></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td>Gary</td>
-                                            <td>Bird</td>
-                                            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa9d9b88839893889eba9f979b9396d4999597">[email&#160;protected]</a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+<body class="antialiased font-sans bg-gray-200">
+    <div class="m-5 px-8 py-6 bg-white rounded grid">
+    <div class="container mx-auto px-4 rounded sm:px-8">
+            <div class="py-8">
+                <h2 class="mx-auto text-3xl font-semibold leading-tight">Usuarios</h2>
+                <div class="my-2 flex sm:flex-row flex-col items-center justify-between">
+                    <div class="flex flex-row mb-1 sm:mb-0">
+                        <div class="flex flex-row mb-1 sm:mb-0">
+                            <div class="relative">
+                                <select class="appearance-none h-full rounded-l border block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option>5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                </select>
+                            </div>
+                            <div class="relative">
+                                <select class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                                    <option>Todas</option>
+                                    <option>Activas</option>
+                                    <option>Inactivas</option>
+                                </select>
                             </div>
                         </div>
+                        <div buscador class="block relative">
+                            <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500"><path d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"></path></svg></span>
+                            <input placeholder="Buscar usuario" class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
+                        </div>
                     </div>
                 </div>
-            </section>
-            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
-            <script src="js/popper.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/main.js"></script>
-            <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816" integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw==" data-cf-beacon='{"rayId":"7bae3000fb7a3850","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.3.0","si":100}' crossorigin="anonymous"></script>
+                <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                        <table class="tabla min-w-full leading-normal">
+                            <thead>
+                                <tr>
+                                    <th>Nombre y apellidos</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de registro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($usuarios as $usuario) : ?>
+                                    <tr>
+                                        <td>
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    <a href="/usuarios/show?id=<?=$usuario['id']; ?>" class="text-blue-500 hover:underline">
+                                                        <?php if($usuario['nombre']) : ?>
+                                                            <?=$usuario['nombre'] . ' ' . $usuario['apellido'];?>
+                                                        <?php else : ?>
+                                                            <span>(Sin nombre)</span> 
+                                                        <?php endif; ?>
+                                                    </a>                                                        
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap"><?= $usuario['email']; ?></p>
+                                            </div>
+                                        <td>
+                                            <?php switch ($usuario['estado']) {
+                                                case '0': 
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Terminada</span>
+                                                        </span>';
+                                                break;
+                                                case '1':
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Inactiva</span>
+                                                        </span>';
+                                                break;
+                                                default:
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Activo</span>
+                                                        </span>';
+                                                break;
+                                            }?>
+                                        </td>
+                                        <td>
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap"><?=date('d-m-Y', strtotime($usuario['fecha_alta']))?></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+                        <span class="text-xs xs:text-sm text-gray-900">
+                            Páginas
+                        </span>
+                        <div class="inline-flex mt-2 xs:mt-0">
+                            <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
+                                Anterior
+                            </button>
+                            <button class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
+                                Siguiente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="mt-6">
-            <a href="/ligas/create" class="text-blue-500 hover:underline">Crear liga</a>
-        </p>
     </div>
+</body>
+
+
+
 </main>
 
 <?php require base_path('views/partials/footer.php') ?>

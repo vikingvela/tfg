@@ -16,7 +16,7 @@ $usuario = $db->query('select * from USUARIO where id = :id', [
 
 // Autoriza que el usuario actual puede editar el usuario
 $usuario = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
-if(!authorize($liga['creado_por'] ===  $usuario || isAdmin($usuario))) 
+if(!authorize($usuario['creado_por'] ===  $usuario || isAdmin($usuario))) 
     $errors['autorizacion'] = 'No tienes autorización para editar este usuario.'; 
 
 // Validar el formulario

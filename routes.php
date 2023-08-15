@@ -42,11 +42,12 @@ $router->post('/deportes', 'deportes/store.php')->only('admin');
 
 // USUARIOS
 $router->get('/usuarios', 'usuarios/index.php');
+$router->get('/usuarios/show', 'usuarios/show.php');
 $router->post('/usuarios', 'usuarios/store.php')->only('auth');
 $router->get('/usuarios/create', 'usuarios/create.php')->only('guest');
 
 // USUARIO
-$router->get('/usuario', 'usuario/show.php')->only('auth');
+$router->get('/usuario/show', 'usuario/show.php');
 $router->patch('/usuario', 'usuarios/update.php')->only('auth');
 $router->delete('/usuario', 'usuario/destroy.php')->only('auth');
 $router->get('/usuario/edit', 'usuarios/edit.php')->only('auth');
@@ -57,5 +58,5 @@ $router->post('/register', 'registration/store.php')->only('guest');
 
 // SESIONES
 $router->get('/login', 'session/create.php')->only('guest');
-$router->post('/session', 'session/store.php');//->only('guest');
-$router->delete('/session', 'session/destroy.php');//->only('auth');
+$router->post('/session', 'session/store.php')->only('guest');
+$router->delete('/session', 'session/destroy.php')->only('auth');

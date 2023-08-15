@@ -3,12 +3,42 @@
 <?php require base_path('views/partials/banner.php') ?>
 <?="ligas/index.view.php"?>
 
+<style>
+    .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    /* otros estilos */
+    }
+
+    .tabla th {
+        padding: 0.75rem 1.25rem; /* px-5 py-3 */
+        border-bottom-width: 2px; /* border-b-2 */
+        border-color: #E5E7EB; /* border-gray-200 */
+        background-color: #F3F4F6; /* bg-gray-100 */
+        text-align: left; /* text-left */
+        font-size: 0.75rem; /* text-xs */
+        font-weight: 600; /* font-semibold */
+        color: #4B5563; /* text-gray-600 */
+        letter-spacing: 0.05em; /* tracking-wider */
+        text-transform: uppercase; /* uppercase */
+    }
+    /* Estilos para las celdas <td> */
+    .tabla td {
+        padding: 1.25rem; /* px-5 py-5 */
+        border-bottom-width: 1px; /* border-b */
+        border-color: #E5E7EB; /* border-gray-200 */
+        background-color: #FFFFFF; /* bg-white */
+        font-size: 0.875rem; /* text-sm */
+        color: #4A5568; /* text-gray-700 */
+    }
+</style>
+
 <main>
 <body class="antialiased font-sans bg-gray-200">
     <div class="m-5 px-8 py-6 bg-white rounded grid">
         <!-- Solo para usuarios que administran ligas-->
         <?php if ($ligasAdmin ?? false) : ?> 
-            <div class="container mx-auto px-4 bg-gren-100 rounded sm:px-8">
+            <div class="container bg-green-100 mx-auto px-4 rounded sm:px-8">
                 <div class="py-8">
                     <h2 class="mx-auto text-3xl font-semibold leading-tight">Ligas administradas por el usuario</h2>
                     <div class="my-2 flex sm:flex-row flex-col items-center justify-between">
@@ -40,22 +70,22 @@
                             </div>
                         <?php }?>
                     </div>
-                    <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                    <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                            <table class="min-w-full leading-normal">
+                            <table class="tabla min-w-full leading-normal">
                                 <thead>
                                     <tr>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Liga</th>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Deporte</th>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Fecha inicio
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Fecha fin</th>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Estado</th>
+                                        <th>Liga</th>
+                                        <th>Deporte</th>
+                                        <th>Fecha inicio
+                                        <th>Fecha fin</th>
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($ligasAdmin as $liga) : ?>
                                         <tr>
-                                            <td logo class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <td>
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 w-10 h-10">
                                                     <?php if (isset($liga['logo'])) : ?>
@@ -71,44 +101,42 @@
                                                 </div>
                                             </div>
                                             </td>
-                                            <td nombre_liga class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <td>
                                                 <?php foreach ($deportes as $deporte) {
                                                     if ($deporte['id'] === $liga['deporte_id']) {
                                                         echo $deporte['nombre'];break;
                                                     }
                                                 }?>
                                             </td>
-                                            <td fecha_inicio class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <td>
                                                 <p class="text-gray-900 whitespace-no-wrap"><?=date('d-m-Y', strtotime($liga['fecha_inicio']))?></p>
                                             </td>
-                                            <td fecha_fin class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <td>
                                                 <p class="text-gray-900 whitespace-no-wrap"><?=date('d-m-Y', strtotime($liga['fecha_fin']))?></p>
                                             </td>
-                                            <td estado class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                <?php foreach ($ligas as $liga) {
-                                                    switch ($liga['estado']) {
-                                                        case '0': 
-                                                            echo '
-                                                                <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Terminada</span>
-                                                                </span>';
-                                                        break;
-                                                        case '1':
-                                                            echo '
-                                                                <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Inactiva</span>
-                                                                </span>';
-                                                        break;
-                                                        default:
-                                                            echo '
-                                                                <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                                    <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                    <span class="relative">Activo</span>
-                                                                </span>';
-                                                        break;
-                                                    }
+                                            <td>
+                                                <?php switch ($liga['estado']) {
+                                                    case '0': 
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Terminada</span>
+                                                            </span>';
+                                                    break;
+                                                    case '1':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Inactiva</span>
+                                                            </span>';
+                                                    break;
+                                                    default:
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Activo</span>
+                                                            </span>';
+                                                    break;
                                                 }?>
                                             </td>
                                         </tr>
@@ -116,7 +144,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
+                        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                             <span class="text-xs xs:text-sm text-gray-900">
                             Páginas
                             </span>
@@ -134,11 +162,9 @@
             </div>
         <?php endif; ?>    
         <!-- Listado de ligas total -->
-        <div class="container mx-auto px-4 sm:px-8">
+        <div class="container mx-auto px-4 rounded sm:px-8">
             <div class="py-8">
-                <div>
-                    <h2 class="mx-auto text-3xl font-semibold leading-tight">Ligas</h2>
-                </div>
+                <h2 class="mx-auto text-3xl font-semibold leading-tight">Ligas</h2>
                 <div class="my-2 flex sm:flex-row flex-col items-center justify-between">
                     <div class="flex flex-row mb-1 sm:mb-0">
                         <div class="flex flex-row mb-1 sm:mb-0">
@@ -163,29 +189,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                        <table class="min-w-full leading-normal">
+                        <table class="tabla min-w-full leading-normal">
                             <thead>
                                 <tr>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Liga
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Deporte
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Fecha inicio
-                                    </th>
-                                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Estado
-                                    </th>
+                                    <th>Liga</th>
+                                    <th>Deporte</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Estado</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($ligas as $liga) : ?>
                                     <tr>
-                                        <td logo class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td>
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 w-10 h-10">
                                                     <?php if (isset($liga['logo'])) : ?>
@@ -195,47 +213,45 @@
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="ml-3">
-                                                <p class="text-gray-900 whitespace-no-wrap">
-                                                    <a href="/liga/show?id=<?php echo $liga['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
-                                                </p>
+                                                    <p class="text-gray-900 whitespace-no-wrap">
+                                                        <a href="/liga/show?id=<?php echo $liga['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td nombre_liga class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td>
                                             <?php foreach ($deportes as $deporte) {
                                                 if ($deporte['id'] === $liga['deporte_id']) {
                                                     echo $deporte['nombre'];break;
                                                 }
                                             }?>
                                         </td>
-                                        <td fecha_inicio class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <td>
                                             <p class="text-gray-900 whitespace-no-wrap"><?=date('d-m-Y', strtotime($liga['fecha_inicio']))?></p>
                                         </td>
-                                        <td estado class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                            <?php foreach ($ligas as $liga) {
-                                                switch ($liga['estado']) {
-                                                    case '0': 
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Terminada</span>
-                                                            </span>';
-                                                    break;
-                                                    case '1':
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Inactiva</span>
-                                                            </span>';
-                                                    break;
-                                                    default:
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Activo</span>
-                                                            </span>';
-                                                    break;
-                                                }
+                                        <td>
+                                            <?php switch ($liga['estado']) {
+                                                case '0': 
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Terminada</span>
+                                                        </span>';
+                                                break;
+                                                case '1':
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Inactiva</span>
+                                                        </span>';
+                                                break;
+                                                default:
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Activo</span>
+                                                        </span>';
+                                                break;
                                             }?>
                                         </td>
                                     </tr>

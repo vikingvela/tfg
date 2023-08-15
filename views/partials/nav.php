@@ -3,8 +3,7 @@
         <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                         alt="Your Company">
+                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Crea tu liga">
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -18,14 +17,18 @@
                         <a href="/contacto" 
                             class="<?= urlIs('/contacto') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacto</a>                        
                         <!-- Botones exclusivos si el usuario se encuentra logeado -->
-                        <?php if (!empty($_SESSION)){ ?> 
+                        <?php if (!empty($_SESSION)) : ?> 
                             <!-- Botones -->
+                                <a href="/equipos" 
+                                class="<?= urlIs('/equipos') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Mis equipos</a>                        
                             <!-- Botones exclusivos si el usuario es administrador -->
-                            <?php if (isAdmin($_SESSION['usuario'])) { ?> 
+                            <?php if (isAdmin($_SESSION['usuario'])) : ?> 
                                 <a href="/deportes" 
                                 class="<?= urlIs('/deportes') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Deportes</a>                        
-                            <?php } ?>
-                        <?php } ?>
+                                <a href="/usuarios" 
+                                class="<?= urlIs('/usuarios') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Usuarios</a>                        
+                            <?php endif; ?>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -60,7 +63,6 @@
                         <div class="ml-3">
                             <form method="POST" action="/session">
                                 <input type="hidden" name="_method" value="DELETE"/>
-
                                 <button class="text-white">Salir</button>
                             </form>
                         </div>

@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+echo "usuarios/edit.php";
 
 $db = App::resolve(Database::class);
 

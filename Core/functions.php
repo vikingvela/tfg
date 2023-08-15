@@ -95,15 +95,16 @@ function getUsuarioIDbyEmail($email){
     ])->find();
     return $usuarioID['id'];
 }
-function getPerfilbyID($id){
+function getbyID($id, $tabla){
+ 
     $db = App::resolve(Database::class);
-    $profile = $db->query('SELECT * from USUARIO where id = :id',[
-        'id' => $id
+    $profile = $db->query('SELECT * from ' .$tabla. ' where id='.$id.'',[
     ])->find();
+    
     return $profile;
 }
 
-function getPperfilbyEmail($email){
+function getperfilbyEmail($email){
     $db = App::resolve(Database::class);
     $profile = $db->query('SELECT * from USUARIO where email = :email',[
         'email' => $email
@@ -114,16 +115,21 @@ function getPperfilbyEmail($email){
 function isAdmin($user){
     $db = App::resolve(Database::class);
     
+    $admin=[];
+
     if(is_int($user)){
         $admin = $db->query('SELECT * from USUARIO where id = :id',[
             'id' => $user
         ])->find();
-    } else {
+    } else if (is_array($user)){
         $admin = $db->query('SELECT * from USUARIO where email = :email',[
             'email' => $user['email']
         ])->find();
+    } else if (is_string($user)){
+        $admin = $db->query('SELECT * from USUARIO where email = :email',[
+            'email' => $user
+        ])->find();
     }
-
     $estado = $admin['estado'];
     $resultado = $estado >= 10 ? true : false;
     return $resultado;
