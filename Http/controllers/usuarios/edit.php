@@ -1,16 +1,25 @@
 <?php
+echo "usuarios/edit.php";
 
 use Core\App;
 use Core\Database;
-echo "usuarios/edit.php";
+
 
 $db = App::resolve(Database::class);
 
-$currentUser = array('email' => $_SESSION['usuario']['email']);
-$currentUserId = getUsuarioIDbyEmail($currentUser['email']);
+if ($_SESSION['usuario'] ?? false) :  {
+    $usuarioActual = $db->query('select * from USUARIO where email = :email', [
+        'email' => $_SESSION['usuario']['email']
+    ])->findOrFail();
+} endif;
+
+$usuario = $db->query('SELECT * from usuario where id = :id', [
+    'id' => $_GET['id']
+])->findOrFail();
 
 view("usuarios/edit.view.php", [
     'heading' => 'Editar usuario',
     'errors' => [],
-    'usuario' => $currentUserId
+    'usuarioActual' => $usuarioActual,
+    'usuario' => $usuario
 ]);

@@ -5,6 +5,8 @@ use Core\Authenticator;
 use Core\Database;
 use Http\Forms\LoginForm;
 
+$db = App::resolve(Database::class);
+
 $form = LoginForm::validate($attributes = [
     'email' => $_POST['email'],
     'password' => $_POST['password']
@@ -20,15 +22,18 @@ if (!$signedIn) {
     )->throw();
 }
 
-$estado = App::resolve(Database::class)->query('select ESTADO from USUARIO where email = :email', ['email' => $_POST['email']])->find();
-switch ($estado["ESTADO"]) {    
+$usuario = $db->query('select * from USUARIO where email = :email', ['email' => $_POST['email']])->findOrFail();
+$db->updateID('usuario', $usuario['id'], array('ultima_sesion' => date("Y-m-d H:i:s")));
+
+
+switch ($usuario['estado']) {    
     case 0; // Usuario inactivo
         $form->error(
             'email', 'Usuario inactivo.'
         )->throw();
         break; 
     case 1; // Usuario activo pero sin datos completados
-        redirect('/usuario/edit');
+        redirect('/usuarios/edit?id=' . $usuario['id']);
         break;
     default; // Usuario activo y con datos completados
         echo "Usuario activo y con datos completados";    

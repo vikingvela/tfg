@@ -1,5 +1,6 @@
 <?php
-//echo "routes.php";
+echo "routes.php/";
+echo ($_SERVER['REQUEST_METHOD'].'/');
 
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
@@ -43,14 +44,13 @@ $router->post('/deportes', 'deportes/store.php')->only('admin');
 // USUARIOS
 $router->get('/usuarios', 'usuarios/index.php');
 $router->get('/usuarios/show', 'usuarios/show.php');
-$router->post('/usuarios', 'usuarios/store.php')->only('auth');
 $router->get('/usuarios/create', 'usuarios/create.php')->only('guest');
+$router->get('/usuarios/edit', 'usuarios/edit.php')->only('auth');
+$router->post('/usuarios', 'usuarios/store.php')->only('auth');
+$router->post('/usuarios', 'usuarios/update.php')->only('auth');
+$router->patch('/usuarios', 'usuarios/update.php')->only('auth');
+$router->delete('/usuarios', 'usuario/destroy.php')->only('admin');
 
-// USUARIO
-$router->get('/usuario/show', 'usuario/show.php');
-$router->patch('/usuario', 'usuarios/update.php')->only('auth');
-$router->delete('/usuario', 'usuario/destroy.php')->only('auth');
-$router->get('/usuario/edit', 'usuarios/edit.php')->only('auth');
 
 $router->get('/register', 'registration/create.php')->only('guest');
 $router->post('/register', 'registration/store.php')->only('guest');

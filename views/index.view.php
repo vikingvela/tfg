@@ -7,7 +7,7 @@
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <p>Hola, <?= $_SESSION['usuario']['email'] ?? 'invitado' ?>. Bienvenido a la página de inicio.</p>            
         </div>
-        <?php if ($_SESSION['user'] ?? false) : ?> 
+        <?php if ($_SESSION['usuario'] ?? false) : ?> 
             <!-- Solo para usuarios -->
             SOLO PARA USUARIOS LOGEADOS
         <?php endif ?>

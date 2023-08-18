@@ -44,23 +44,22 @@
                                   d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
                         </svg>
                     </button>
-
                     <!-- Profile dropdown -->
-                    <?php if ($_SESSION['usuario'] ?? false) : ?>
-                        
+                    <?php if ($_SESSION['usuario'] ?? false) : ?>                        
                         <div class="relative ml-3">
-                            <button type="button"
-                                    class="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="sr-only">Menú de usuario</span>
+                            <a href="/usuarios/show?id=<?=getUsuarioIDbyEmail($_SESSION['usuario']['email'])?>">
+                                <button type="button"
+                                        class="flex max-w-xs items-center hover:text-white rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                        id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <span class="sr-only">Menú de usuario</span>
 
-                                <img class="h-8 w-8 rounded-full"
-                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
-                            </button>
+                                    <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </a>
                         </div>
-
-                        <div class="ml-3">
+                        <div class="ml-3 mt-3">
                             <form method="POST" action="/session">
                                 <input type="hidden" name="_method" value="DELETE"/>
                                 <button class="text-white">Salir</button>

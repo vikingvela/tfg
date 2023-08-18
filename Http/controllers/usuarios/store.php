@@ -18,8 +18,13 @@ if (! empty($errors)) {
     ]);
 }
 
-$datos = [(string)$_POST['nombre'], (string)$_POST['apellido'], (string)$_POST['email'], (string)$_POST['password'], (string)$_POST['rol']];
-generarConsultaInsert('USUARIO', $datos);
+$db->insert('USUARIO',[
+    'nombre'=>$_POST['nombre'], 
+    'apellido'=>$_POST['apellido'], 
+    'email'=>$_POST['email'], 
+    'password'=>password_hash($_POST['password'], PASSWORD_BCRYPT),
+    'fecha_alta'=>date('Y-m-d H:i:s')
+]);
 
 header('location: /');
 die();

@@ -1,15 +1,17 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
-<?php echo "view/usuarios/edit.view.php";?>
 
-<?php $perfil = getbyID($usuario, 'USUARIO');?>
+<?php echo "view/usuarios/edit.view.php";
+if ($errors ?? false) echo "errors: " . $errors;
+?>
+
 
 <main>
 <div class="m-5 px-8 py-6 bg-white rounded grid">
-  <form action="/usuario" method="POST" enctype="multipart/form-data">
+  <form action="/usuarios" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
+    <input type="hidden" name="id" value="<?= $usuario['id'] ?>">
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
         <h2 class="text-base font-semibold leading-7 text-gray-900">Perfil de usuario</h2>
@@ -30,7 +32,7 @@
                 id="nombre"
                 placeholder="Nombre"
                 required
-                value="<?=isset($perfil['nombre']) ? $perfil['nombre'] : "" ?>">
+                value="<?=isset($usuario['nombre']) ? $usuario['nombre'] : "" ?>">
             </div>
             <?php if (isset($errors['apellido'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['apellido'] ?></p><?php endif; ?>
           </div>
@@ -42,7 +44,7 @@
                 id="apellido"
                 placeholder="Apellido"
                 required
-                value="<?=isset($perfil['apellido']) ? $perfil['apellido'] : "" ?>">
+                value="<?=isset($usuario['apellido']) ? $usuario['apellido'] : "" ?>">
               </div>
               <?php if (isset($errors['apellido'])) : ?><p class="text-red-500 text-xs mt-2"><?= $errors['apellido'] ?></p><?php endif; ?>
           </div>
@@ -55,7 +57,7 @@
                   name="email"
                   type="email"
                   readonly
-                  value="<?=$perfil['email']?>">
+                  value="<?=$usuario['email']?>">
               </div>
               <div class="mt-2 ml-2">
                 <button type="button" onclick="window.location.href='/prueba'" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cambiar</button>

@@ -112,38 +112,38 @@ function getperfilbyEmail($email){
     return $profile;
 }
 
-function isAdmin($user){
+function isAdmin($usuario){
     $db = App::resolve(Database::class);
     
     $admin=[];
 
-    if(is_int($user)){
+    if(is_int($usuario)){
         $admin = $db->query('SELECT * from USUARIO where id = :id',[
-            'id' => $user
+            'id' => $usuario
         ])->find();
-    } else if (is_array($user)){
+    } else if (is_array($usuario)){
         $admin = $db->query('SELECT * from USUARIO where email = :email',[
-            'email' => $user['email']
+            'email' => $usuario['email']
         ])->find();
-    } else if (is_string($user)){
+    } else if (is_string($usuario)){
         $admin = $db->query('SELECT * from USUARIO where email = :email',[
-            'email' => $user
+            'email' => $usuario
         ])->find();
     }
     $estado = $admin['estado'];
     $resultado = $estado >= 10 ? true : false;
     return $resultado;
 }
-function isGestor($user){
+function isGestor($usuario){
     $db = App::resolve(Database::class);
     
-    if(is_int($user)){
+    if(is_int($usuario)){
         $organizador = $db->query('SELECT * from USUARIO where id = :id',[
-            'id' => $user
+            'id' => $usuario
         ])->find();
     } else {
         $organizador = $db->query('SELECT * from USUARIO where email = :email',[
-            'email' => $user['email']
+            'email' => $usuario['email']
         ])->find();
     }
 

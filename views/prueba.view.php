@@ -6,7 +6,7 @@
    <div>
       PRUEBA
    </div>
-   <?php dd($_SESSION);?>
+   <?php //dd(getUsuarioIDbyEmail($_SESSION['usuario']['email']));?>
 </main>
 
 <?php require('partials/footer.php') ?>

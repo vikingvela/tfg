@@ -15,8 +15,7 @@ $usuario = $db->query('select * from USUARIO where id = :id', [
 ])->findOrFail();
 
 // Autoriza que el usuario actual puede editar el usuario
-$usuario = getUsuarioIDbyEmail($_SESSION['usuario']['email']);
-if(!authorize($usuario['creado_por'] ===  $usuario || isAdmin($usuario))) 
+if(!authorize($usuario['email'] === $_SESSION['usuario']['email'] || isAdmin($usuario)))
     $errors['autorizacion'] = 'No tienes autorización para editar este usuario.'; 
 
 // Validar el formulario
@@ -35,13 +34,14 @@ if (count($errors)) {
         'usuario' => $usuario
     ]);
 }
-$db->updateID('usuario', $_POST['id'],[
+$db->updateID('usuario',$_POST['id'],[
     'nombre' => $_POST['nombre'],
     'apellido' => $_POST['apellido'],
     'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
+    'estado' => '2',
     'fecha_mod' => date('Y-m-d H:i:s')
 ]);
 
 // Redireccionar a la página de inicio
-header('location: /usuarios');
+header('location: /');
 die();
