@@ -15,6 +15,10 @@ $equipos = $db->query('SELECT * from equipos_ligas where liga_id = :id', [
     'id' => $_GET['id']
 ])->get();
 
+if(isset($_SESSION['usuario']) && getUsuarioIDbyEmail($_SESSION['usuario']['email']) === $liga['creado_por']) {
+    $liga['admin'] = 1;
+}
+
 
 view("ligas/show.view.php", [
     'heading' => 'Información sobre la liga',

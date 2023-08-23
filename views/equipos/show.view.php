@@ -36,6 +36,9 @@
   <div class="border-b border-gray-900/10 pb-12">
     <div class="flex-container flex-col m-5 px-8 py-6 bg-white rounded items-center gap-10">
       <div cover class="mx-2 p-2 ">
+        <?php if(isset($equipo['admin'])) :?>
+          <button type="button" onclick="window.location.href = '/equipo/edit?id=<?php echo $equipo['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar datos</button>
+        <?php endif; ?>
        <div class="flex-shink-0 max-w h-100"></div><?=isset($equipo['cover']) ? $equipo['cover'] : "" ?></div>
         <div class="flex items-center justify-between w-full mx-4 p-4 text-5xl">
           <?=isset($equipo['nombre']) ? $equipo['nombre'] : "" ?>
@@ -66,9 +69,9 @@
                             </div>
                             <div class="relative">
                                 <select class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                                    <option>Todas</option>
-                                    <option>Activas</option>
-                                    <option>Inactivas</option>
+                                    <option>Todos</option>
+                                    <option>Activos</option>
+                                    <option>Inactivos</option>
                                 </select>
                             </div>
                         </div>
@@ -77,6 +80,9 @@
                             <input placeholder="Buscar liga" class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                         </div>
                     </div>
+                    <?php if(isset($equipo['admin'])) :?>
+                        <button type="button" onclick="window.location.href = '/ligas/register?id=<?php echo $equipo['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Inscribirse</button>
+                    <?php endif; ?>
                 </div>
                 <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">

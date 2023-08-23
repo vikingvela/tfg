@@ -37,7 +37,10 @@
   <div class="border-b border-gray-900/10 pb-12">
     <div class="flex-container flex-col m-5 px-8 py-6 bg-white rounded items-center gap-10">
       <div cover class="mx-2 p-2">
-       <div class="flex-shink-0 max-w h-100"></div><?=isset($liga['cover']) ? $liga['cover'] : "" ?></div>
+        <?php if(isset($liga['admin'])) :?>
+          <button type="button" onclick="window.location.href = '/liga/edit?id=<?php echo $liga['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar datos</button>
+        <?php endif; ?>
+        <div class="flex-shink-0 max-w h-100"></div><?=isset($liga['cover']) ? $liga['cover'] : "" ?></div>
         <div class="flex items-center justify-between w-full mx-4 p-4 text-5xl">
           <?=isset($liga['nombre']) ? $liga['nombre'] : "" ?>
           <div class="flex-shrink-0 w-64 h-64">
@@ -87,6 +90,9 @@
                   </table>
                 </div>
               </div>
+              <?php if(isset($liga['admin'])) :?>
+                <button type="button" onclick="window.location.href = '/liga/edit?id=<?php echo $liga['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar datos</button>
+              <?php endif; ?>
             </div>
           </div>
           <div class="mt-6 flex items-center justify-end gap-x-6">

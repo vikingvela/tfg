@@ -34,13 +34,18 @@ if (count($errors)) {
         'usuario' => $usuario
     ]);
 }
-$db->updateID('usuario',$_POST['id'],[
+
+$datos = array(
     'nombre' => $_POST['nombre'],
     'apellido' => $_POST['apellido'],
     'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
-    'estado' => '2',
     'fecha_mod' => date('Y-m-d H:i:s')
-]);
+);
+
+if($usuario['estado'] < 2) $datos['estado'] = 2;
+
+$db->updateID('usuario',$_POST['id'], $datos);
+
 
 // Redireccionar a la página de inicio
 header('location: /');

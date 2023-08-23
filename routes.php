@@ -1,21 +1,24 @@
 <?php
 echo "routes.php/";
 echo ($_SERVER['REQUEST_METHOD'].'/');
-
+//dd($_SERVER);
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');
 $router->get('/contacto', 'contacto.php');
 $router->get('/prueba', 'prueba.php');
-$router->post('/prueba', 'prueba.php');
+$router->get('/notificaciones', 'notificaciones.php')->only('auth');
+//$router->post('/prueba', 'prueba.php');
+$router->get('/prueba', 'prueba.php');
 
 // LIGAS
 $router->get('/ligas', 'ligas/index.php');
 $router->get('/ligas/create', 'ligas/create.php')->only('gestor');
+$router->get('/ligas/register', 'ligas/register.php')->only('auth');
 $router->post('/ligas', 'ligas/store.php')->only('auth');
 
 $router->get('/liga/show', 'ligas/show.php');
-$router->delete('/liga', 'ligas/destroy.php')->only('gestor');
 $router->get('/liga/edit', 'ligas/edit.php')->only('gestor');
+$router->delete('/liga', 'ligas/destroy.php')->only('gestor');
 $router->patch('/liga', 'ligas/update.php')->only('gestor');
 
 

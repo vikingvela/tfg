@@ -96,7 +96,7 @@
                                                 </div>
                                                 <div class="ml-3">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    <a href="/liga/edit?id=<?php echo $liga['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
+                                                    <a href="/liga/show?id=<?php echo $liga['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
                                                 </p>
                                                 </div>
                                             </div>
@@ -120,21 +120,28 @@
                                                         echo '
                                                             <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
                                                                 <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Terminada</span>
+                                                                <span class="relative">Inactiva</span>
                                                             </span>';
                                                     break;
                                                     case '1':
                                                         echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Inactiva</span>
-                                                            </span>';
-                                                    break;
-                                                    default:
-                                                        echo '
                                                             <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                                                 <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Activo</span>
+                                                                <span class="relative">Abierta</span>
+                                                            </span>';
+                                                    break;
+                                                    case '2':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Activa</span>
+                                                            </span>';
+                                                    break;
+                                                    case '3':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-grey-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Finalizada</span>
                                                             </span>';
                                                     break;
                                                 }?>
@@ -231,27 +238,34 @@
                                         </td>
                                         <td>
                                             <?php switch ($liga['estado']) {
-                                                case '0': 
-                                                    echo '
-                                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                            <span class="relative">Terminada</span>
-                                                        </span>';
-                                                break;
-                                                case '1':
-                                                    echo '
-                                                        <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                            <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                            <span class="relative">Inactiva</span>
-                                                        </span>';
-                                                break;
-                                                default:
-                                                    echo '
-                                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                            <span class="relative">Activo</span>
-                                                        </span>';
-                                                break;
+                                                    case '0': 
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Inactiva</span>
+                                                            </span>';
+                                                    break;
+                                                    case '1':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Abierta</span>
+                                                            </span>';
+                                                    break;
+                                                    case '2':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Activa</span>
+                                                            </span>';
+                                                    break;
+                                                    case '3':
+                                                        echo '
+                                                            <span class="relative inline-block px-3 py-1 font-semibold text-grey-900 leading-tight">
+                                                                <span aria-hidden class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
+                                                                <span class="relative">Finalizada</span>
+                                                            </span>';
+                                                    break;
                                             }?>
                                         </td>
                                     </tr>

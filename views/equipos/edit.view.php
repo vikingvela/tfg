@@ -111,7 +111,7 @@
                           <input placeholder="Invitar @email jugador" class="appearance-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                         </div>
                         <div btn_crear class="block relative mx-max">
-                          <a href="/ligas/create" class="rounded rounded-l-none border border-l-0 border-gray-400 bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Invitar</a>
+                          <a href="/ligas/create" class="rounded rounded-l-none border-0 border-l-0 border-gray-400 bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Invitar</a>
                         </div>
                       </div>
                   </div>

@@ -19,9 +19,8 @@ $deportes = $db->query('SELECT * from deporte')->get();
 $ligas_equipo = $db->query('SELECT * from equipos_ligas where equipo_id = :id', [
     'id' => $_GET['id']
 ])->get();
-
+$ligas=[];
 if(!empty($ligas_equipo)){
-    $ligas=[];
     // por cada liga del equipo en $ligas_equipo busco la liga en la tabla liga y lo guardo en $ligas
     foreach ($ligas_equipo as $liga_equipo) {
         $liga = $db->query('SELECT * from liga where id = :id', [

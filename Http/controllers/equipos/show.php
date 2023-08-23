@@ -20,8 +20,8 @@ $ligas_equipo = $db->query('SELECT * from equipos_ligas where equipo_id = :id', 
     'id' => $_GET['id']
 ])->get();
 
+$ligas=[];
 if(!empty($ligas_equipo)){
-    $ligas=[];
     // por cada liga del equipo en $ligas_equipo busco la liga en la tabla liga y lo guardo en $ligas
     foreach ($ligas_equipo as $liga_equipo) {
         $liga = $db->query('SELECT * from liga where id = :id', [
@@ -34,6 +34,9 @@ if(!empty($ligas_equipo)){
         }
         $ligas[] = $liga;
     }
+}
+if(isset($_SESSION['usuario']) && getUsuarioIDbyEmail($_SESSION['usuario']['email']) === $equipo['creado_por']) {
+    $equipo['admin'] = 1;
 }
 
 // JUGADORES
