@@ -165,25 +165,29 @@ function enviarSolicitud($tipo, $idDestino, $idOrigen) {
     // Crea una nueva entrada en la tabla de solicitudes con los detalles
     // Tipo: 'equipo' o 'liga'
     // IdDestino: ID del equipo o liga al que se envía la solicitud
-    // IdOrigen: ID del usuario que envía la solicitud
+    // IdOrigen: ID del usuario que envía la solicitud, o del equipo que envía la solicitud
     // Puedes guardar la fecha actual aquí también
     $db = App::resolve(Database::class);
     $data = [];
-    if($tipo === 'equipo'){
-        $tipo = 'SOLICITUDESEQUIPOS';
-        $data = [
-            'jugador_id' => $idDestino,
-            'equipo_id' => $idOrigen
-        ];
-    } else if ($tipo === 'liga'){
-        $tipo = 'SOLICITUDESLIGAS';
-        $data = [
-            'equipo_id' => $idDestino,
-            'liga_id' => $idOrigen
-        ];
+    switch ($tipo) {
+        case 'equipo':
+            $tabla = 'SOLICITUDESEQUIPOS';
+            $data = [
+                'jugador_id' => $idDestino,
+                'equipo_id' => $idOrigen
+            ];
+            break;
+        case 'liga':
+            $tabla = 'SOLICITUDESLIGAS';
+            $data = [
+                'liga_id' => $idDestino,
+                'equipo_id' => $idOrigen
+            ];
+            break;
+        default:
+            break;
     }
-
-    $db->insert($tipo, $data);
+    $db->insert($tabla, $data);
 
     // Después de crear la solicitud, puedes notificar al creador del equipo/liga
     // usando una función para crear una notificación en la tabla de notificaciones

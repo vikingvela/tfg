@@ -43,10 +43,19 @@ if(isset($_SESSION['usuario']) && getUsuarioIDbyEmail($_SESSION['usuario']['emai
 $jugadores = $db->query('SELECT * from jugador where equipo_id = :id', [
     'id' => $_GET['id']
 ])->get();
+$usuarios = [];
+if(!empty($jugadores)){
+    foreach($jugadores as $jugador){
+        $usuario = $db->query('SELECT * from usuario where id = :id', [
+            'id' => $jugador['usuario_id']
+        ])->findOrFail();
+        $usuarios[] = $usuario;
+    }
+}
 
 view("equipos/show.view.php", [
     'heading' => 'Equipo',
     'equipo' => $equipo,
-    'jugadores' => $jugadores,
+    'usuarios' => $usuarios,
     'ligas' => $ligas
 ]);

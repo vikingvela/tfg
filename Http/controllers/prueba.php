@@ -37,7 +37,7 @@ unset($liga, $deporte);
 /*
 $campo = $_POST['campo'] ?? null;
 $tabla ='';
-foreach ($ligas as $liga) {
+foreach ($ligas as $liga) { /register.php?liga_id='.$liga['id'].'
     $tabla.='<tr>';
     $tabla.='<td>';
     $tabla.='<div class="flex items-center">';

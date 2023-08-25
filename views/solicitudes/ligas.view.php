@@ -1,6 +1,7 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
+
 <?="ligas/register.view.php"?>
 
 <style>
@@ -32,6 +33,12 @@
         color: #4A5568; /* text-gray-700 */
     }
 </style>
+<script>
+function redirectIt(obj){
+    var goToLink = obj.getAttribute("href");
+    window.location.href=goToLink;
+}
+</script>
 
 <main>
 <body class="antialiased font-sans bg-gray-200">
@@ -102,33 +109,40 @@
                                         </td>
                                         <td>
                                             <?php switch ($liga['solicitud']) {
-                                                    case '0': 
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Denegada</span>
-                                                            </span>';
-                                                    break;
-                                                    case '1':
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Solicitada</span>
-                                                            </span>';
-                                                    break;
-                                                    case '2':
-                                                        echo '
-                                                            <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                                <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Aprobada</span>
-                                                            </span>';
-                                                    break;
-                                                    default:
-                                                    echo '<button type="button" onclick="window.location.href = "/ligas/register?id='.enviarSolicitud('liga',$liga['id'],$equipo['id']).'" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Inscribirse</button>';
-                                            }?>
+                                                case '0': 
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Denegada</span>
+                                                        </span>';
+                                                break;
+                                                case '1':
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Solicitada</span>
+                                                        </span>';
+                                                break;
+                                                case '2':
+                                                    echo '
+                                                        <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                            <span class="relative">Aprobada</span>
+                                                        </span>';
+                                                break;
+                                                case '-1':
+                                                    echo '
+                                                    <form action="/solicitudes/ligas" method="POST" enctype="multipart/form-data">
+                                                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Solicitar</button>
+                                                    <input type="hidden" id="liga_id" name="liga_id" value="'.$liga['id'].'">
+                                                    <input type="hidden" id="equipo_id" name="equipo_id" value="'.$equipo['id'].'">
+                                                    </form>';
+                                                }?> 
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
+
+
                             </tbody>
                         </table>
                     </div>

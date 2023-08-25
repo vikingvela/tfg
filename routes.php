@@ -10,10 +10,14 @@ $router->get('/notificaciones', 'notificaciones.php')->only('auth');
 //$router->post('/prueba', 'prueba.php');
 $router->get('/prueba', 'prueba.php');
 
+// SOLICITUDES
+$router->get('/solicitudes/ligas', 'solicitudes/ligas.php')->only('auth');
+$router->get('/solicitudes/equipos', 'solicitudes/equipos.php')->only('auth');
+$router->post('/solicitudes/ligas', 'solicitudes/store.php')->only('auth');
+
 // LIGAS
 $router->get('/ligas', 'ligas/index.php');
 $router->get('/ligas/create', 'ligas/create.php')->only('gestor');
-$router->get('/ligas/register', 'ligas/register.php')->only('auth');
 $router->post('/ligas', 'ligas/store.php')->only('auth');
 
 $router->get('/liga/show', 'ligas/show.php');

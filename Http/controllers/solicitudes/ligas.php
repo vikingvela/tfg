@@ -3,11 +3,10 @@
 use Core\App;
 use Core\Database;
 
-echo "ligas/register.php";
+echo "solicitudes/ligas.php";
 
 $db = App::resolve(Database::class);
 
-//dd($_SERVER);
 $equipo = getbyID($_GET['id'], 'EQUIPO');
 $usuario = getbyID(getUsuarioIDbyEmail($_SESSION['usuario']['email']), 'USUARIO');
 
@@ -37,9 +36,7 @@ foreach ($ligas_abiertas as $liga) {
     $ligas[] = $liga;
 }
 
-//dd($ligas);
-
-view("ligas/register.view.php", [
+view("solicitudes/ligas.view.php", [
     'heading' => 'Ligas',
     'ligas' => $ligas,
     'equipo' => $equipo,

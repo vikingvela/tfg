@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <?php if(isset($equipo['admin'])) :?>
-                        <button type="button" onclick="window.location.href = '/ligas/register?id=<?php echo $equipo['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Inscribirse</button>
+                        <button type="button" onclick="window.location.href = '/solicitudes/ligas?id=<?php echo $equipo['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Inscribirse</button>
                     <?php endif; ?>
                 </div>
                 <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -192,13 +192,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if(!empty($jugadores)) :?>
-                                    <?php foreach ($jugadores as $jugador) : ?>
+                                <?php if(!empty($usuarios)) :?>
+                                    <?php foreach ($usuarios as $usuario) : ?>
                                         <tr>
                                             <td> 
                                                 <div class="ml-3">
                                                     <p class="text-gray-900 whitespace-no-wrap">
-                                                        <a href="/jugador/show?id=<?php echo $jugador['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
+                                                        <a href="/usuarios/show?id=<?php echo $usuario['id']; ?>" class="text-blue-500 hover:underline"><?php echo $usuario['nombre'].' '.$usuario['apellido']; ?></a>
                                                     </p>
                                                 </div>
                                             </td>

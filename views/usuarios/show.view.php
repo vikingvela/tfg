@@ -100,13 +100,13 @@ border-collapse: collapse;
                                             <?php if(isset($equipos)) : 
                                             foreach ($equipos as $equipo) : ?>
                                                 <tr>
-                                                <td>
-                                                    <div class="ml-3">
-                                                    <p class="text-gray-900 whitespace-no-wrap">
-                                                        <a href="/equipo/show?id=<?php echo $equipo['id']; ?>" class="text-blue-500 hover:underline"><?=$equipo['nombre'] ?></a>
-                                                    </p>
-                                                    </div>
-                                                </td>
+                                                    <td>
+                                                        <div class="ml-3">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            <a href="/equipo/show?id=<?php echo $equipo['id']; ?>" class="text-blue-500 hover:underline"><?=$equipo['nombre'] ?></a>
+                                                        </p>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach;?>
                                             <?php endif; ?>
