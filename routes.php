@@ -7,13 +7,14 @@ $router->get('/about', 'about.php');
 $router->get('/contacto', 'contacto.php');
 $router->get('/prueba', 'prueba.php');
 $router->get('/notificaciones', 'notificaciones.php')->only('auth');
-//$router->post('/prueba', 'prueba.php');
 $router->get('/prueba', 'prueba.php');
 
 // SOLICITUDES
 $router->get('/solicitudes/ligas', 'solicitudes/ligas.php')->only('auth');
 $router->get('/solicitudes/equipos', 'solicitudes/equipos.php')->only('auth');
 $router->post('/solicitudes/ligas', 'solicitudes/store.php')->only('auth');
+$router->post('/solicitudes/equipos', 'solicitudes/store.php')->only('auth');
+
 
 // LIGAS
 $router->get('/ligas', 'ligas/index.php');

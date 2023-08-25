@@ -182,6 +182,32 @@
                             <input placeholder="Buscar liga" class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                         </div>
                     </div>
+                    <?php
+                        switch ($solicitudesEquipos['estado']){
+                            case 0: // Denegada
+                                echo '<span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Terminada</span>
+                                        </span>';
+                                break;
+                            case 1: // Solicitada
+                                echo '<span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                            <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                            <span class="relative">Solicitada</span>
+                                        </span>';
+                                break;
+                            case 2: // Aceptada
+                                $equipo['solicitud'] = 2;
+                                break;
+                            default: // No solicitada
+                                echo '<form action="/solicitudes/equipos" method="POST">
+                                            <input type="hidden" name="equipo_id" value="' . $equipo['id'] . '">
+                                            <input type="hidden" name="usuario_id" value="' . $usuarioActual['id'] . '">
+                                            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Solicitar</button>
+                                        </form>';
+                                break;
+                        }
+                    ?>
                 </div>
                 <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">

@@ -5,6 +5,12 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
+if ($_SESSION['usuario'] ?? false) :  {
+    $usuarioActual = $db->query('select * from USUARIO where email = :email', [
+        'email' => $_SESSION['usuario']['email']
+    ])->findOrFail();
+} endif;
+
 echo "equipos/show.php";
 
 // EQUIPO
@@ -43,12 +49,24 @@ if(isset($_SESSION['usuario']) && getUsuarioIDbyEmail($_SESSION['usuario']['emai
 $jugadores = $db->query('SELECT * from jugador where equipo_id = :id', [
     'id' => $_GET['id']
 ])->get();
+
+// SOLICITUDES Equipos
+if(isset($_SESSION['usuario'])) {
+    $solicitudesEquipos = $db->query('SELECT estado from solicitudesEquipos where equipo_id = :id and usuario_id = :usuario_id',  [
+        'id' => $_GET['id'],
+        'usuario_id' => $usuarioActual['id']
+    ])->find();
+
+}
+//dd($solicitudesEquipos['estado']);
 $usuarios = [];
+
 if(!empty($jugadores)){
     foreach($jugadores as $jugador){
         $usuario = $db->query('SELECT * from usuario where id = :id', [
             'id' => $jugador['usuario_id']
         ])->findOrFail();
+        //if(isset($_SESSION['usuario'])) if($jugador['usuario_id'] === $usuarioActual['id']) $esJugador = true;
         $usuarios[] = $usuario;
     }
 }
@@ -56,6 +74,8 @@ if(!empty($jugadores)){
 view("equipos/show.view.php", [
     'heading' => 'Equipo',
     'equipo' => $equipo,
+    'solicitudesEquipos' => $solicitudesEquipos,
+    'usuarioActual' => $usuarioActual,
     'usuarios' => $usuarios,
     'ligas' => $ligas
 ]);
