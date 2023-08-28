@@ -3,7 +3,7 @@
 use Core\App;
 use Core\Database;
 
-echo "solicitudes/ligas.php";
+echo "solicitudes/equipos.php";
 
 $db = App::resolve(Database::class);
 
@@ -36,10 +36,10 @@ foreach ($ligas_abiertas as $liga) {
     $ligas[] = $liga;
 }
 
-view("solicitudes/ligas.view.php", [
-    'heading' => 'Ligas',
+view("solicitudes/equipos.view.php", [
+    'heading' => 'Equipos',
     'ligas' => $ligas,
     'equipo' => $equipo,
-    'solicitudesLigas' => $solicitudesLigas,
+    'solicitudesLigas' => $solicitudesEquipos,
     'errors' => []
 ]);

@@ -94,6 +94,41 @@
                 <button type="button" onclick="window.location.href = '/liga/edit?id=<?php echo $liga['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar datos</button>
               <?php endif; ?>
             </div>
+            <?php if($liga['estado']=='1') { ?>
+              <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+                  <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+                    <table name=solicitudes class="tabla min-w-full leading-normal">
+                      <thead>
+                        <tr>
+                          <th>Solicitudes de equipos</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($equipos as $equipo) : ?>
+                          <tr>
+                            <td>
+                              <div class="flex items-center">
+                                <div class="flex-shrink-0 w-10 h-10">
+                                  <?php if (isset($equipo['escudo'])) : ?>
+                                    <img src="<?= $equipo['escudo'] ?>" alt="Escudo del equipo">
+                                  <?php else : ?>
+                                    <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                                  <?php endif; ?>
+                                </div>
+                                <div class="ml-3">
+                                  <p class="text-gray-900 whitespace-no-wrap">
+                                    <a href="/equipo/show?id=<?=$equipo['equipo_id']; ?>" class="text-blue-500 hover:underline"><?=getNombrebyID($equipo['equipo_id'],'EQUIPO');?></a>
+                                  </p>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              <?php } ?>
           </div>
           <div class="mt-6 flex items-center justify-end gap-x-6">
             <button type="button" onclick="javascript:history.back()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Salir</button>

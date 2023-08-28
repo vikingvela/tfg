@@ -5,6 +5,7 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
+$usuarioActual = null;
 if ($_SESSION['usuario'] ?? false) :  {
     $usuarioActual = $db->query('select * from USUARIO where email = :email', [
         'email' => $_SESSION['usuario']['email']
@@ -51,6 +52,7 @@ $jugadores = $db->query('SELECT * from jugador where equipo_id = :id', [
 ])->get();
 
 // SOLICITUDES Equipos
+$solicitudesEquipos = [];
 if(isset($_SESSION['usuario'])) {
     $solicitudesEquipos = $db->query('SELECT estado from solicitudesEquipos where equipo_id = :id and usuario_id = :usuario_id',  [
         'id' => $_GET['id'],
