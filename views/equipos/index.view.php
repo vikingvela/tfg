@@ -113,7 +113,7 @@
                                                         echo '
                                                             <span class="relative inline-block px-3 py-1 font-semibold text-blue-900 leading-tight">
                                                                 <span aria-hidden class="absolute inset-0 bg-blue-200 opacity-50 rounded-full"></span>
-                                                                <span class="relative">Activo</span>
+                                                                <span class="relative">Cerrado</span>
                                                             </span>';
                                                     break;
                                                 }?>
@@ -232,7 +232,7 @@
                                         </td>
                                         <td><?= $deporte['nombre'] ?></td>
                                         <td><?php
-                                            switch ($equipo['estado']) {
+                                            switch ($liga['estado']) {
                                                 case '0': 
                                                     echo '
                                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
@@ -251,7 +251,7 @@
                                                     echo '
                                                         <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                                             <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                            <span class="relative">Activo</span>
+                                                            <span class="relative">Activa</span>
                                                         </span>';
                                                 break;
                                             }?>

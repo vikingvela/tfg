@@ -14,6 +14,7 @@ $router->get('/solicitudes/ligas', 'solicitudes/ligas.php')->only('auth');
 $router->get('/solicitudes/equipos', 'solicitudes/equipos.php')->only('auth');
 $router->post('/solicitudes/ligas', 'solicitudes/store.php')->only('auth');
 $router->post('/solicitudes/equipos', 'solicitudes/store.php')->only('auth');
+$router->post('/solicitudes/update', 'solicitudes/update.php')->only('auth');
 
 
 // LIGAS

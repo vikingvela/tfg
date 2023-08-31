@@ -55,9 +55,9 @@
         <div fechas class="mx-4 p-4 text-lg">Liga de <?=isset($liga['deporte_id']) ? getNombrebyID($liga['deporte_id'],'DEPORTE') : "deporte" ?> celebrada entre <?=date('d-m-Y', strtotime($liga['fecha_inicio']))?> y <?=date('d-m-Y', strtotime($liga['fecha_fin']))?>.</div>
         <div equipos>
           <!-- Listado de equipos participantes -->
-          <div class="container mx-auto px-4 bg-gren-100 rounded sm:px-8">
+          <div class="container mx-auto bg-gren-100 rounded">
             <div class="py-8">
-              <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+              <div class="sm:mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                 <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                   <table class="tabla min-w-full leading-normal">
                     <thead>
@@ -90,38 +90,52 @@
                   </table>
                 </div>
               </div>
-              <?php if(isset($liga['admin'])) :?>
-                <button type="button" onclick="window.location.href = '/liga/edit?id=<?php echo $liga['id']; ?>';" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Editar datos</button>
-              <?php endif; ?>
             </div>
-            <?php if($liga['estado']=='1') { ?>
-              <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+            <?php if($liga['estado']=='1' & isset($liga['admin']) & !empty($solicitudes)){ ?>
+              <div class="sm:-mx-8 sm:px-8 py-4 overflow-x-auto">
                   <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                     <table name=solicitudes class="tabla min-w-full leading-normal">
                       <thead>
                         <tr>
-                          <th>Solicitudes de equipos</th>
+                          <th>Solicitudes pendientes de equipos</th>
+                          <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($equipos as $equipo) : ?>
+                        <?php foreach ($solicitudes as $solicitud) : ?>
                           <tr>
                             <td>
                               <div class="flex items-center">
                                 <div class="flex-shrink-0 w-10 h-10">
-                                  <?php if (isset($equipo['escudo'])) : ?>
-                                    <img src="<?= $equipo['escudo'] ?>" alt="Escudo del equipo">
+                                  <?php if (isset($solicitud['escudo'])) : ?>
+                                    <img src="<?= $solicitud['escudo'] ?>" alt="Escudo del equipo">
                                   <?php else : ?>
                                     <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
                                   <?php endif; ?>
                                 </div>
                                 <div class="ml-3">
                                   <p class="text-gray-900 whitespace-no-wrap">
-                                    <a href="/equipo/show?id=<?=$equipo['equipo_id']; ?>" class="text-blue-500 hover:underline"><?=getNombrebyID($equipo['equipo_id'],'EQUIPO');?></a>
+                                    <a href="/equipo/show?id=<?=$solicitud['id']; ?>" class="text-blue-500 hover:underline"><?=getNombrebyID($solicitud['id'],'EQUIPO');?></a>
                                   </p>
                                 </div>
                               </div>
                             </td>
+                            <td class="flex items-center space-x-2">
+                                <form action="/solicitudes/update" method="POST" enctype="multipart/form-data">
+                                  <button type="submit" class="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">Aceptar</button>
+                                  <input type="hidden" id="destino_id" name="liga_id" value="<?=$liga['id']?>">
+                                  <input type="hidden" id="origen_id" name="equipo_id" value="<?=$solicitud['id']?>">
+                                  <input type="hidden" id="tipo" name="tipo" value="LIGA">
+                                  <input type="hidden" id="estado" name="estado" value="aprobada">                                  
+                                </form>
+                                <form action="/solicitudes/update" method="POST" enctype="multipart/form-data">
+                                  <button type="submit" class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">Denegar</button>
+                                  <input type="hidden" id="destino_id" name="liga_id" value="<?=$liga['id']?>">
+                                  <input type="hidden" id="origen_id" name="equipo_id" value="'.$solicitud['id'].'">
+                                  <input type="hidden" id="tipo" name="tipo" value="LIGA">
+                                  <input type="hidden" id="estado" name="estado" value="denegada">                                  
+                                </form>
+                              </td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>

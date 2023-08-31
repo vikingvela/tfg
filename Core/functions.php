@@ -194,34 +194,12 @@ function enviarSolicitud($tipo, $idDestino, $idOrigen) {
     //crearNotificacion($idOrigen, "Tienes una nueva solicitud de acceso.", "solicitud", "/notificaciones");
 }
 
-function responderSolicitud($idSolicitud, $estado, $idOrigen, $tipoSolicitud) {
-    $db = App::resolve(Database::class);
-    
-    // Actualizar el estado de la solicitud en la base de datos
-    $sql = "UPDATE solicitudes SET estado = :estado WHERE id = :id";
-    $params = array(
-        'estado' => $estado,
-        'id' => $idSolicitud
-    );
-    $db->query($sql, $params);
-    
-    // Obtener información de la solicitud
-    $solicitud = $db->query("SELECT * FROM solicitudes WHERE id = :id", ['id' => $idSolicitud])->fetch();
-    
-    // Crear una notificación para el usuario que realizó la solicitud
-    $mensaje = "Tu solicitud de " . $tipoSolicitud . " ha sido " . ($estado == 'aprobada' ? 'aprobada' : 'rechazada');
-    $enlace = "/notificaciones"; // Cambiar al enlace apropiado
-    crearNotificacion($solicitud['usuario_id'], $mensaje, 'respuesta_solicitud', $enlace);
-    
-    // Redirigir al usuario a la página de notificaciones u otra página según tu flujo de aplicación
-    header("Location: /notificaciones");
-    exit();
-}
 
 
 // Función para crear una notificación en la tabla de notificaciones
-function crearNotificacion($usuarioId, $mensaje, $tipo, $enlace) {
-    $db = App::resolve(Database::class);    
+function crearNotificacion($usuarioId, $mensaje,) {
+    $db = App::resolve(Database::class);
+
     // Inserta una nueva entrada en la tabla de notificaciones con los detalles
     $sql = "INSERT INTO notificaciones (usuario_id, mensaje, tipo, enlace, fecha) 
             VALUES (:usuario_id, :mensaje, :tipo, :enlace, NOW())";
@@ -229,25 +207,12 @@ function crearNotificacion($usuarioId, $mensaje, $tipo, $enlace) {
     $params = array(
         'usuario_id' => $usuarioId,
         'mensaje' => $mensaje,
-        'tipo' => $tipo,
-        'enlace' => $enlace
     );
     
-    $db->query($sql, $params);
+    $db->insert('NOTIFICACION', $params);
 }
 
-/* Lógica para usar la función
-$usuarioId = $_SESSION['usuario']['id']; // ID del usuario actualmente logueado
-$mensaje = "Tienes una nueva solicitud de acceso.";
-$tipo = "solicitud";
-$enlace = "/notificaciones"; // Puedes establecer el enlace que redirigirá al usuario cuando haga clic en la notificación
 
-crearNotificacion($usuarioId, $mensaje, $tipo, $enlace);
-*/
-
-
-
-// Función para obtener las notificaciones de un usuario
 function getNotificaciones($usuarioId) {
     // Consulta la tabla de notificaciones filtrando por el usuario
     // Puedes ordenar las notificaciones por fecha descendente para mostrar las más recientes primero

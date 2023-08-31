@@ -40,7 +40,8 @@ if (count($errors)) {
 
 $datos = array(
     'nombre' => $_POST['nombre'],
-    'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email']),
+    'estado' => $_POST['estado'],
+    'modificado_por' => getUsuarioIDbyEmail($_SESSION['usuario']['email'])
 );
 $db->updateID('equipo', $_POST['id'], $datos);
 

@@ -43,10 +43,9 @@ function redirectIt(obj){
 <main>
 <body class="antialiased font-sans bg-gray-200">
     <div class="m-5 px-8 py-6 bg-white rounded grid"> 
-        <!-- Listado de ligas total -->
         <div class="container mx-auto px-4 rounded sm:px-8">
             <div class="py-8">
-                <h2 class="mx-auto text-3xl font-semibold leading-tight">Ligas</h2>
+                <h2 class="mx-auto text-3xl font-semibold leading-tight">Equipos</h2>
                 <div class="my-2 flex sm:flex-row flex-col items-center justify-between">
                     <div class="flex flex-row mb-1 sm:mb-0">
                         <div class="flex flex-row mb-1 sm:mb-0">
@@ -76,39 +75,31 @@ function redirectIt(obj){
                         <table class="tabla min-w-full leading-normal">
                             <thead>
                                 <tr>
-                                    <th>Liga</th>
-                                    <th>Deporte</th>
-                                    <th>Fecha inicio</th>
-                                    <th>Inscripción</th>
+                                    <th>Nombre del equipo</th>
+                                    <th>Solicitudes de inscripción</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($ligas as $liga) : ?>
+                                <?php foreach ($equipos as $equipo) : ?>
                                     <tr>
                                         <td>
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0 w-10 h-10">
-                                                    <?php if (isset($liga['logo'])) : ?>
-                                                        <img src="<?= $liga['logo'] ?>" alt="Logo de la liga">
+                                                    <?php if (isset($equipo['logo'])) : ?>
+                                                        <img src="<?= $equipo['logo'] ?>" alt="Logo del equipo">
                                                     <?php else : ?>
                                                         <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="ml-3">
                                                     <p class="text-gray-900 whitespace-no-wrap">
-                                                        <a href="/liga/show?id=<?php echo $liga['id']; ?>" class="text-blue-500 hover:underline"><?php echo $liga['nombre']; ?></a>
+                                                        <a href="/equipo/show?id=<?php echo $equipo['id']; ?>" class="text-blue-500 hover:underline"><?php echo $equipo['nombre']; ?></a>
                                                     </p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                        <p class="text-gray-900 whitespace-no-wrap"><?=$liga['deporte']?></p>
-                                        </td>
-                                        <td>
-                                            <p class="text-gray-900 whitespace-no-wrap"><?=date('d-m-Y', strtotime($liga['fecha_inicio']))?></p>
-                                        </td>
-                                        <td>
-                                            <?php switch ($liga['solicitud']) {
+                                            <?php switch ($equipo['solicitud']) {
                                                 case '0': 
                                                     echo '
                                                         <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
@@ -129,20 +120,11 @@ function redirectIt(obj){
                                                             <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
                                                             <span class="relative">Aprobada</span>
                                                         </span>';
-                                                break;
-                                                case '-1':
-                                                    echo '
-                                                    <form action="/solicitudes/ligas" method="POST" enctype="multipart/form-data">
-                                                    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Solicitar</button>
-                                                    <input type="hidden" id="liga_id" name="liga_id" value="'.$liga['id'].'">
-                                                    <input type="hidden" id="equipo_id" name="equipo_id" value="'.$equipo['id'].'">
-                                                    </form>';
+                                                break;  
                                                 }?> 
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
-
-
                             </tbody>
                         </table>
                     </div>

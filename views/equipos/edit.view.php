@@ -37,7 +37,7 @@
 <body class="antialiased font-sans bg-gray-200">
   <div class="">
     <div class="m-5 px-8 py-6 bg-white rounded grid">      
-      <form action="/equipos" method="POST" enctype="multipart/form-data">
+      <form action="/equipo" method="POST" enctype="multipart/form-data">
         <!-- Otras variables -->
         <input type="hidden" name="_method" value="PATCH">
         <input type="hidden" name="id" value="<?= $equipo['id'] ?>">  
@@ -86,90 +86,15 @@
                 </div>
                 <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF hasta 10MB</p>
               </div>              
-          </div>
-        </div>        
-        <!-- Comprueba que $ligas no esté vacío -->
-        <?php if(!empty($ligas)) :?>
-          <p>
-            <h2 class="py-8 mx-auto text-3xl font-semibold leading-tight">Ligas en las que participa el equipo</h2>
-          </p>
-          <?php foreach($ligas as $liga) :?>
-            <div class="container mx-auto px-4 rounded sm:px-8">
-              <div class="py-8">
-                <div class="flex flex-col my-2">
-                  <div class="flex justify-between items-center text-xl mb-1">
-                    <h4 class="font-semibold leading-tight"><?=$liga['nombre'].' ('.$liga['deporte'].')'?></h4>
-                    <div class="flex flex-column items-center">
-                        <select class="appearance-none h-full rounded border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                          <option>Todos</option>
-                          <option>Activos</option>
-                          <option>Inactivos</option>
-                          <option>Invitados</option>
-                        </select>
-                        <div buscador class="block relative mx-auto sm:border-l-0 sm:border-r-0 border-r">
-                          <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2"><svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500"><path d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z"></path></svg></span>
-                          <input placeholder="Invitar @email jugador" class="appearance-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-                        </div>
-                        <div btn_crear class="block relative mx-max">
-                          <a href="/ligas/create" class="rounded rounded-l-none border-0 border-l-0 border-gray-400 bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Invitar</a>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-                <div class="mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-                  <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                    <table class="tabla min-w-full leading-normal">
-                      <thead>
-                        <tr>
-                          <th>Jugador</th>
-                          <th>Estado</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php if(!empty($liga['jugadores'])) :?>
-                          <?php foreach ($liga['jugadores'] as $jugador) : ?>
-                            <tr>
-                              <td>
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                  <a href="/usuario/show?id=<?php echo $jugador['id']; ?>" class="text-blue-500 hover:underline"><?php echo $jugador['nombre']; ?></a>
-                                </p>
-                              </td>
-                              <td>
-                                <?php switch ($jugador['estado']) {
-                                  case '0': 
-                                    echo '
-                                      <span class="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight">
-                                        <span aria-hidden class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Terminada</span>
-                                      </span>';
-                                  break;
-                                  case '1':
-                                    echo '
-                                      <span class="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                        <span aria-hidden class="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Inactiva</span>
-                                      </span>';
-                                  break;
-                                  default:
-                                    echo '
-                                      <span class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                        <span aria-hidden class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Activo</span>
-                                      </span>';
-                                  break;
-                                }?>
-                              </td>
-                            </tr>
-                          <?php endforeach; ?>
-                        <?php endif; ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+          </div><br>
+          <?php if ($equipo['estado']!=0): ?>
+            <div class="block text-sm font-medium leading-6 text-gray-900">
+              <label for="estado" >Permite que los jugadores soliciten acceso:</label><br>
+              Sí <input type="radio" name="estado" value="1" <?php if ($equipo['estado'] === 1) echo 'checked'; ?>>
+              - <input type="radio" name="estado" value="2" <?php if ($equipo['estado'] === 2) echo 'checked'; ?>> No
             </div>
-          <?php endforeach; ?>
-        <?php endif; ?>
+          <?php endif; ?>
+        </div>
         <!-- Botones -->
         <div class="mt-6 flex items-center justify-end gap-x-6">
           <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>

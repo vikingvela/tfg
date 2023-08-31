@@ -26,7 +26,8 @@ class Database {
         $this->query($sql, $data);
 
         return $this;
-    }    public function query($query, $params = []){
+    }    
+    public function query($query, $params = []){
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($params);
         return $this;
@@ -51,7 +52,7 @@ class Database {
     }
 
     public function update($table, $data)
-    {
+   {
         $fields = array_keys($data);
         $update_fields = [];
         foreach ($fields as $field) {

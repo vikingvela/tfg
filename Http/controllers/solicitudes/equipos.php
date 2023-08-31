@@ -4,42 +4,38 @@ use Core\App;
 use Core\Database;
 
 echo "solicitudes/equipos.php";
-
 $db = App::resolve(Database::class);
 
 $equipo = getbyID($_GET['id'], 'EQUIPO');
 $usuario = getbyID(getUsuarioIDbyEmail($_SESSION['usuario']['email']), 'USUARIO');
 
-!authorize($equipo['creado_por'] ===  $usuario['id'] || isAdmin($usuario['id']));
-
-$ligas_abiertas = $db->query('SELECT * FROM LIGA where estado = 1')->get();
-$deportes = $db->query('SELECT * from DEPORTE')->get();
-$solicitudesLigas = $db->query('SELECT * from SOLICITUDESLIGAS where equipo_id = :id', [
-    'id' => $_GET['id']
+$solicitudesEquipos = $db->query('SELECT * from SOLICITUDESEQUIPOS where usuario_id = :id', [
+    'id' => (int)$usuario['id']
 ])->get();
 
+$equipos=[];
+$existe = false;
 
-$ligas=[];
-foreach ($ligas_abiertas as $liga) {
-    foreach ($deportes as $deporte) {
-        if ($deporte['id'] === $liga['deporte_id']) {
-            $liga['deporte'] = $deporte['nombre'];
-            break;
-        }        
-    }
-    foreach ($solicitudesLigas as &$solicitud) {
-        if ($solicitud['liga_id'] === $liga['id']) {
-            $liga['solicitud'] = $solicitud['estado'];
-        }
-    }
-    $liga['solicitud'] ?? $liga['solicitud'] = -1;
-    $ligas[] = $liga;
+foreach ($solicitudesEquipos as &$solicitud){
+    $equipo_solicitado=$db->query('SELECT * from EQUIPO where id = :id', [
+        'id' => (int)$solicitud['equipo_id']
+    ])->find();
+    $equipo_solicitado['solicitud'] = $solicitud['estado'];
+    if(!(int)$equipo_solicitado['id']==(int)$equipo['id']) $existe = true;
+
+    $equipos[] = $equipo_solicitado;    
+}
+if(!$existe) {
+    $db->insert('solicitudesEquipos', [
+        'usuario_id' => (int)$usuario['id'],
+        'equipo_id' => (int)$equipo['id']
+    ]);
+    $equipo['solicitud'] = 1;
+    $equipos[] = $equipo;
 }
 
 view("solicitudes/equipos.view.php", [
     'heading' => 'Equipos',
-    'ligas' => $ligas,
-    'equipo' => $equipo,
-    'solicitudesLigas' => $solicitudesEquipos,
+    'equipos' => $equipos,
     'errors' => []
 ]);
