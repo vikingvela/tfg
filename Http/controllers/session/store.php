@@ -4,6 +4,7 @@ use Core\App;
 use Core\Authenticator;
 use Core\Database;
 use Http\Forms\LoginForm;
+echo "session/store.php";
 
 $db = App::resolve(Database::class);
 
@@ -15,13 +16,11 @@ $form = LoginForm::validate($attributes = [
 $signedIn = (new Authenticator)->attempt(
     $attributes['email'], $attributes['password']
 );
-
 if (!$signedIn) {
     $form->error(
         'email', 'Ninguna cuenta encontrada para ese correo y contraseña.'
     )->throw();
 }
-
 $usuario = $db->query('select * from USUARIO where email = :email', ['email' => $_POST['email']])->findOrFail();
 $db->updateID('usuario', $usuario['id'], array('ultima_sesion' => date("Y-m-d H:i:s")));
 

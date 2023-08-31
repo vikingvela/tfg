@@ -17,7 +17,7 @@
                         <a href="/contacto" 
                             class="<?= urlIs('/contacto') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacto</a>                        
                         <!-- Botones exclusivos si el usuario se encuentra logeado -->
-                        <?php if (!empty($_SESSION)) : ?> 
+                        <?php if (!empty($_SESSION)) : dd($_SESSION);?> 
                             <!-- Botones -->
                                 <a href="/equipos" 
                                 class="<?= urlIs('/equipos') ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Equipos</a>                        

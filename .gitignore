@@ -26,6 +26,7 @@ node_modules/
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+config.php
 
 # Directories potentially created on remote AFP share
 .AppleDB
