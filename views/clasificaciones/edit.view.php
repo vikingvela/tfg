@@ -30,33 +30,6 @@
       font-size: 0.875rem; /* text-sm */
       color: #4A5568; /* text-gray-700 */
   }
-  /* Estilo para el contenedor de la cuadrícula */
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-    grid-template-rows: repeat(2, 1fr); /* 2 filas */
-    grid-gap: 10px; /* Espacio entre elementos */
-}
-
-/* Estilo para cada celda de la cuadrícula */
-.grid-item {
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-}
-
-/* Estilo para los nombres de los equipos */
-.team-name {
-    font-weight: bold;
-}
-
-/* Estilo para los cuadros de texto */
-.result-input {
-    width: 100%;
-    border: none;
-    text-align: center;
-    font-weight: bold;
-}
 </style>
 
 <main>
@@ -69,40 +42,27 @@
       <input type="hidden" name="jornada_id" value="<?= $jornada['id'] ?>">
       <input type="hidden" name="liga_id" value="<?= $liga['id'] ?>"> 
       <!-- Nombre del equipo -->
-      <div class="container-fluid mx-4 p-4">
-          <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombre de la liga</label>
-          <div class="mt-2">
-            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                <input type="text" class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    name="nombre" 
-                    id="nombre" 
-                    autocomplete="nombre" 
-                    required 
-                    value="<?=isset($partido['fecha_hora']) ? $partido['fecha_hora'] : "" ?>">
-            </div>
-          </div>
-        </div>
-
-
-
-
-      <label class="form-label my-8">Fecha del partido: </label>
-      <input name="fecha_hora" type="date" required value="<?=$fecha?>" class="block flex-1 border border-gray-400 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
-      <div class="grid-container mt-6">
-        <div class="grid-item">
-          <div class="team-name"><?= getNombrebyID($partido['equipo_local_id'], 'EQUIPO'); ?></div>
-          <input type="number" min='0' class="result-input block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" name="resultado_local" id="resultado_local" required value="<?=isset($partido['resultado_local']) ? $partido['resultado_local'] : "" ?>">
-        </div>
-        <div class="grid-item">
-          <div class="team-name"><?= getNombrebyID($partido['equipo_visitante_id'], 'EQUIPO'); ?></div>
-          <input type="number" min='0' class="result-input block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" name="resultado_visitante" id="resultado_visitante" required value="<?=isset($partido['resultado_visitante']) ? $partido['resultado_visitante'] : "" ?>">
-        </div>
-      </div>   
+      <div class="flex">
+          <label class="mx-4 text-gray-500">Fecha del partido</label>
+      </div>
+      <input name="fecha_hora" type="date" required value="<?= $liga['fecha_inicio']?>" class="block m-4 flex-1 border border-gray-400 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+      
+      <div class="flex container flex-auto items-center space-between my-4">
+        <label class="mx-4 text-gray-500">Puntuación equipo local</label>
+        <input type="number" min='0' class="rounded" name="resultado_local" id="resultado_local" required 
+          value="<?php if(isset($partido['resultado_local'])) echo $partido['resultado_local']; else echo ''; ?>">
+      </div>
+      <div class="flex container flex-auto items-center space-between my-4">
+        <label class="mx-4 text-gray-500">Puntuación equipo visitante</label>
+        <input type="number" min='0' class="rounded" name="resultado_visitante" id="resultado_visitante" required 
+          value="<?php if(isset($partido['resultado_visitante'])) echo $partido['resultado_visitante'];?>">
+      </div>
       <!-- Botones -->
       <div class="mt-6 flex items-center justify-end gap-x-6">
         <button type="button" onclick="javascript:history.back()" class="text-sm font-semibold leading-6 text-gray-900">Cancelar</button>
         <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Guardar</button>
       </div>
+      
     </form>
   </div>
 </body>
