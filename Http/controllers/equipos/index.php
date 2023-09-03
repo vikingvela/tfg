@@ -28,7 +28,7 @@ if(!empty($_SESSION)) {
         foreach($equipos_ligas as $equipo_liga){
             if($equipo['id'] == $equipo_liga['equipo_id']){
                 $equipo['liga_id'] = $equipo_liga['liga_id'];
-                $equipo['deporte_id'] = $equipo_liga['deporte_id'];
+                //$equipo['deporte_id'] = $equipo_liga['deporte_id'];
             }
         }
     }

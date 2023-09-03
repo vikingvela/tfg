@@ -114,7 +114,6 @@ function getperfilbyEmail($email){
 
 function isAdmin($usuario){
     $db = App::resolve(Database::class);
-    dd($usuario);
     $admin=[];
 
     if(is_int($usuario)){

@@ -27,6 +27,13 @@ $router->get('/liga/edit', 'ligas/edit.php')->only('gestor');
 $router->delete('/liga', 'ligas/destroy.php')->only('gestor');
 $router->patch('/liga', 'ligas/update.php')->only('gestor');
 
+// CLASIFICACIONES
+$router->get('/clasificacion/create', 'clasificaciones/create.php')->only('gestor');
+$router->get('/clasificacion/edit', 'clasificaciones/edit.php')->only('gestor');
+$router->post('/clasificacion', 'clasificaciones/store.php')->only('gestor');
+$router->patch('/clasificacion', 'clasificaciones/update.php')->only('gestor');
+
+
 
 // EQUIPOS
 $router->get('/equipos', 'equipos/index.php');

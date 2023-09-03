@@ -16,6 +16,7 @@ $form = LoginForm::validate($attributes = [
 $signedIn = (new Authenticator)->attempt(
     $attributes['email'], $attributes['password']
 );
+
 if (!$signedIn) {
     $form->error(
         'email', 'Ninguna cuenta encontrada para ese correo y contraseña.'

@@ -59,9 +59,6 @@ if (!empty($_POST)) {
     // Se actualiza el estado de la solicitud a 2 (aprobada)
     // Se crea una nueva entrada en la tabla EQUIPOS_LIGAS
     if($_POST['estado'] == (string)"aprobada"){
-      $deporte_id = $db->query("SELECT deporte_id FROM LIGA WHERE id = :id", [
-        'id' => (int)$_POST['liga_id']
-      ])->find();
 
       $db->updateID($tabla, $solicitud['id'], [
         'equipo_id' => (int)$_POST['equipo_id'],
@@ -72,7 +69,6 @@ if (!empty($_POST)) {
       $db->insert('EQUIPOS_LIGAS', [
         'equipo_id' => (int)$_POST['equipo_id'],
         'liga_id' => (int)$_POST['liga_id'],
-        'deporte_id' => (int)$deporte_id['deporte_id'],
       ]);
 
     // Se ha pulsado el botón de denegar
