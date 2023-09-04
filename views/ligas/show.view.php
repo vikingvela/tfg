@@ -229,7 +229,7 @@
                 }
                 $fecha = date('d-m-Y', strtotime($partido['fecha_hora']));                
                 echo "<p>$equipoA vs $equipoB - Resultado: $resultado - Fecha: $fecha ";
-                if(isset($liga['admin']))
+                if(isset($liga['admin']) && empty($partido['estado']))
                 echo "<button type='button' onclick=\"window.location.href = '/clasificacion/edit?id={$partido['id']}';\" class='my-2 rounded-md bg-indigo-600 px-1 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Editar</button>";
               }
               echo "</p></div></div></div>";

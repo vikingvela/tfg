@@ -24,6 +24,28 @@ if (! Validator::string($_POST['apellido'], 1, 50)) {
     $errors['apellido'] = 'Un apellido de no más de 50 caracteres es necesario.';
 }
 
+// Validar que el archivo sea una imagen
+$nombreArchivo = $_FILES["foto"]["name"];
+$rutaTemporal = $_FILES["foto"]["tmp_name"];
+
+// Define el tamaño máximo en 10MB
+$tamanoMaximoMB = 10;
+
+// Define las dimensiones máximas (ancho x alto en píxeles)
+$anchoMaximo = 600;
+$altoMaximo = 600;
+
+// Verifica el tamaño en MB
+if ($_FILES["foto"]["size"] / (1024 * 1024) > $tamanoMaximoMB) {
+    $errors['foto'] = "Error: La imagen es demasiado grande (máximo $tamanoMaximoMB MB).";
+} else {
+    // Verifica las dimensiones en píxeles
+    list($ancho, $alto) = getimagesize($rutaTemporal);
+    if ($ancho > $anchoMaximo || $alto > $altoMaximo) {
+        $errors['foto'] = "Error: Las dimensiones de la imagen son demasiado grandes (máximo $anchoMaximo x $altoMaximo píxeles).";
+    } 
+}
+
 // Si no hay errores en la validación, actualizar la tabla de usuarios
 if (count($errors)) {
     return view('usuarios/edit.view.php', [

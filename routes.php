@@ -8,6 +8,7 @@ $router->get('/contacto', 'contacto.php');
 $router->get('/prueba', 'prueba.php');
 $router->get('/notificaciones', 'notificaciones.php')->only('auth');
 $router->get('/prueba', 'prueba.php');
+$upload->post('/upload', 'upload.php')->only('auth');
 
 // SOLICITUDES
 $router->get('/solicitudes/ligas', 'solicitudes/ligas.php')->only('auth');

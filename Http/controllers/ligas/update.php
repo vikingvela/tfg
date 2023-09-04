@@ -37,7 +37,28 @@ if (!(date_create($_POST['fecha_fin']) > date_create($_POST['fecha_inicio']))) {
     $errors['fecha'] = 'La fecha de fin no puede ser anterior a la fecha de inicio.';
 }
 
-// FALTA VALIDAR EL LOGO Y LA PORTADA
+
+// Validar que el archivo sea una imagen
+$nombreArchivo = $_FILES["logo"]["name"];
+$rutaTemporal = $_FILES["logo"]["tmp_name"];
+
+// Define el tamaño máximo en 10MB
+$tamanoMaximoMB = 10;
+
+// Define las dimensiones máximas (ancho x alto en píxeles)
+$anchoMaximo = 600;
+$altoMaximo = 600;
+
+// Verifica el tamaño en MB
+if ($_FILES["logo"]["size"] / (1024 * 1024) > $tamanoMaximoMB) {
+    $errors['logo'] = "Error: La imagen es demasiado grande (máximo $tamanoMaximoMB MB).";
+} else {
+    // Verifica las dimensiones en píxeles
+    list($ancho, $alto) = getimagesize($rutaTemporal);
+    if ($ancho > $anchoMaximo || $alto > $altoMaximo) {
+        $errors['logo'] = "Error: Las dimensiones de la imagen son demasiado grandes (máximo $anchoMaximo x $altoMaximo píxeles).";
+    } 
+}
 
 // Validar que el nombre no se encuentra repetido
 $existe = $db->query('SELECT nombre FROM LIGA WHERE nombre = :nombre AND id != :id', [

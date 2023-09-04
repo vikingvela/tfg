@@ -33,6 +33,29 @@ if ($existe) {
     $errors['nombre'] = 'Este nombre ya se encuentra registrado.';
 }
 
+
+// Validar que el archivo sea una imagen
+$nombreArchivo = $_FILES["logo"]["name"];
+$rutaTemporal = $_FILES["logo"]["tmp_name"];
+
+// Define el tamaño máximo en 10MB
+$tamanoMaximoMB = 10;
+
+// Define las dimensiones máximas (ancho x alto en píxeles)
+$anchoMaximo = 600;
+$altoMaximo = 600;
+
+// Verifica el tamaño en MB
+if ($_FILES["logo"]["size"] / (1024 * 1024) > $tamanoMaximoMB) {
+    $errors['logo'] = "Error: La imagen es demasiado grande (máximo $tamanoMaximoMB MB).";
+} else {
+    // Verifica las dimensiones en píxeles
+    list($ancho, $alto) = getimagesize($rutaTemporal);
+    if ($ancho > $anchoMaximo || $alto > $altoMaximo) {
+        $errors['logo'] = "Error: Las dimensiones de la imagen son demasiado grandes (máximo $anchoMaximo x $altoMaximo píxeles).";
+    } 
+}
+
 if (!empty($errors)) {
     return view("ligas/create", [
         'heading' => 'Crear Liga',

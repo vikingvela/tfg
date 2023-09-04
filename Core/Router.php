@@ -63,6 +63,18 @@ class Router
 
         $this->abort();
     }
+    public function upload($uri, $method)
+    {
+        foreach ($this->routes as $route) {
+            if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                Middleware::resolve($route['middleware']);
+
+                return require base_path('Httpdocs/img/' . $route['upload']);
+            }
+        }
+
+        $this->abort();
+    }
 
     public function previousUrl()
     {

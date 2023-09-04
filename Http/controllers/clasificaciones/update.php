@@ -33,21 +33,44 @@ $db->updateID('PARTIDO', $partido['id'], array(
     'resultado_local' => $_POST['resultado_local'],
     'resultado_visitante' => $_POST['resultado_visitante']
 ));
+actualizarResultado($partido['equipo_local_id'],$liga, [$_POST['resultado_local'], $_POST['resultado_visitante']]);
+actualizarResultado($partido['equipo_visitante_id'],$liga, [$_POST['resultado_visitante'], $_POST['resultado_local']]);
 
-// RESOLUCION DE PUNTOS PARA LA CLASIFICACION
-if($partido['resultado_local'] > $partido['resultado_visitante']){
-    // Local ganador
-    actualizarClasificacion($partido['equipo_local_id'], $liga['id'], 3, 1, 1, 0, 0, $partido['resultado_local'], $partido['resultado_visitante'], $partido['resultado_local'] - $partido['resultado_visitante']);
-    actualizarClasificacion($partido['equipo_visitante_id'], $liga['id'], 0, 1, 0, 0, 1, $partido['resultado_visitante'], $partido['resultado_local'], $partido['resultado_visitante'] - $partido['resultado_local']);
-} else if ($partido['resultado_local'] < $partido['resultado_visitante']){
-    // Visitante ganador
-    actualizarClasificacion($partido['equipo_local_id'], $liga['id'], 0, 1, 1, 0, 1, $partido['resultado_local'], $partido['resultado_visitante'], $partido['resultado_local'] - $partido['resultado_visitante']);
-    actualizarClasificacion($partido['equipo_visitante_id'], $liga['id'], 3, 1, 0, 0, 9, $partido['resultado_visitante'], $partido['resultado_local'], $partido['resultado_visitante'] - $partido['resultado_local']);
-} else if ($partido['resultado_local'] == $partido['resultado_visitante']){
-    // Empate
-    actualizarClasificacion($partido['equipo_local_id'], $liga['id'], 1, 1, 0, 1, 0, $partido['resultado_local'], $partido['resultado_visitante'], $partido['resultado_local'] - $partido['resultado_visitante']);
-    actualizarClasificacion($partido['equipo_visitante_id'], $liga['id'], 1, 1, 0, 1, 0, $partido['resultado_visitante'], $partido['resultado_local'], $partido['resultado_visitante'] - $partido['resultado_local']);
-} 
+
+function actualizarResultado($equipo_id,$liga, $resultado){
+    
+    switch($liga['deporte_id']){
+        
+        case '0': // 'Fútbol';
+        default:   if($resultado[0]>$resultado[1]){
+                        $puntos = 3;
+                        $ganados = 1;
+                        $empatados = 0;
+                        $perdidos = 0;
+                        $favor = $resultado[0];
+                        $contra = $resultado[1];
+                        $diferencia = $resultado[0] - $resultado[1];
+                    } else if ($resultado[0]<$resultado[1]){
+                        $puntos = 0;
+                        $ganados = 0;
+                        $empatados = 0;
+                        $perdidos = 1;
+                        $favor = $resultado[0];
+                        $contra = $resultado[1];
+                        $diferencia = $resultado[0] - $resultado[1];
+                    } else if ($resultado[0]==$resultado[1]){
+                        $puntos = 1;
+                        $ganados = 0;
+                        $empatados = 1;
+                        $perdidos = 0;
+                        $favor = $resultado[0];
+                        $contra = $resultado[1];
+                        $diferencia = $resultado[0] - $resultado[1];
+                    }
+                    actualizarClasificacion ($equipo_id, $liga['id'], $puntos, 1, $ganados, $empatados, $perdidos, $favor, $contra, $diferencia);
+        break;
+    }
+}
 
 function actualizarClasificacion ($equipo_id, $liga_id, $puntos, $jugados, $ganados, $empatados, $perdidos, $favor, $contra, $diferencia){
     $db = App::resolve(Database::class);
@@ -66,7 +89,9 @@ function actualizarClasificacion ($equipo_id, $liga_id, $puntos, $jugados, $gana
         'gc' => $clasificacion['contra'] + $contra,
         'dif' => $clasificacion['diferencia'] + $diferencia
     ));
-}
+    $db->updateID('PARTIDO', $partido['id'], array(
+        'estado' => 2
+    ));
 
 
 // Redirige al usuario
