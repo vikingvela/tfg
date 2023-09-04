@@ -5,8 +5,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-echo "equipos/destroy.php";
-
 $liga = $db->query('select * from equipo where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();

@@ -5,8 +5,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-echo "deportes/destry.php";
-
 $liga = $db->query('select * from DEPORTE where id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();

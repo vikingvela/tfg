@@ -2,7 +2,6 @@
 
 use Core\App;
 use Core\Database;
-echo "usuarios/show.php";
 
 $db = App::resolve(Database::class);
 

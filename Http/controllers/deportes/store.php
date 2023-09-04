@@ -7,8 +7,6 @@ use Core\Validator;
 $db = App::resolve(Database::class);
 $errors = [];
 
-echo "deportes/store.php";
-
 
 // Validar los campos de entrada
 if (! Validator::string($_POST['nombre'], 1, 45)) {

@@ -1,7 +1,6 @@
 <?php
 use Core\App;
 use Core\Database;
-echo "solicitudes/update.php";
 
 $db = App::resolve(Database::class);
 $errors = [];

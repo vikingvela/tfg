@@ -1,5 +1,4 @@
 <?php
-echo "usuarios/edit.php";
 
 use Core\App;
 use Core\Database;

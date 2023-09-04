@@ -12,8 +12,6 @@ if ($_SESSION['usuario'] ?? false) :  {
     ])->findOrFail();
 } endif;
 
-echo "equipos/show.php";
-
 // EQUIPO
 $equipo = $db->query('SELECT * from equipo where id = :id', [
     'id' => $_GET['id']

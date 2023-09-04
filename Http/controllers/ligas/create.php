@@ -13,10 +13,6 @@ use Core\Session;
     - 4: Liga finalizada y validada, no se puede editar nada
 */
 
-
-
-echo "ligas/create.php";
-
 $db = App::resolve(Database::class);
 
 view("ligas/create.view.php", [

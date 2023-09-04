@@ -1,6 +1,6 @@
 <?php
-echo "routes.php/";
-echo ($_SERVER['REQUEST_METHOD'].'/');
+//echo "routes.php/";
+//echo ($_SERVER['REQUEST_METHOD'].'/');
 //dd($_SERVER);
 $router->get('/', 'index.php');
 $router->get('/about', 'about.php');

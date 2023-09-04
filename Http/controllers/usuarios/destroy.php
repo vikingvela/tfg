@@ -4,7 +4,6 @@ use Core\App;
 use Core\Database;
 
 $db = App::resolve(Database::class);
-echo "usuarios/destroy.php";
 
 $currentUserId = 1;
 

@@ -1,5 +1,4 @@
 <?php
-echo "usuarios/create.php";
 /*
     La organización de usuarios se organiza según su estado:
     - 0: Usuario dado de baja

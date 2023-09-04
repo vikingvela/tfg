@@ -1,7 +1,6 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php') ?>
-<?="ligas/index.view.php"?>
 
 <style>
     .tabla {
@@ -91,7 +90,7 @@
                                                     <?php if (isset($liga['logo'])) : ?>
                                                         <img src="<?= $liga['logo'] ?>" alt="Logo de la liga">
                                                     <?php else : ?>
-                                                        <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                                                        <img class="w-full h-full rounded-full" src="https://www.shutterstock.com/shutterstock/photos/2126440532/display_1500/stock-vector-soccer-team-emblem-logo-design-vector-illustration-2126440532.jpg" alt="" />
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="ml-3">
@@ -216,7 +215,7 @@
                                                     <?php if (isset($liga['logo'])) : ?>
                                                         <img src="<?= $liga['logo'] ?>" alt="Logo de la liga">
                                                     <?php else : ?>
-                                                        <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                                                        <img class="w-full h-full rounded-full" src="https://www.shutterstock.com/shutterstock/photos/2126440532/display_1500/stock-vector-soccer-team-emblem-logo-design-vector-illustration-2126440532.jpg" alt="" />
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="ml-3">

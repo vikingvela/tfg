@@ -3,8 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "ligas/edit.php";
-
 $db = App::resolve(Database::class);
 
 // Encontrar la liga correspondiente al id

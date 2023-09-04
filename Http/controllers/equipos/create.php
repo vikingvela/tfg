@@ -1,6 +1,5 @@
 <?php
 
-echo "equipos/create.php";
 /*
     Según el 'estado' del equipo su comportamiento es diferente:
     - 0: Equipo inactivo, no se pueden unir jugadores al equipo

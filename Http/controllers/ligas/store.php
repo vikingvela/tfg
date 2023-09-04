@@ -4,8 +4,6 @@ use Core\App;
 use Core\Validator;
 use Core\Database;
 
-echo "ligas/store.php";
-
 $db = App::resolve(Database::class);
 $errors = [];
 

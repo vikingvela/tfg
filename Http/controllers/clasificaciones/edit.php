@@ -3,7 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "clasificacion/edit.php";
 
 $db = App::resolve(Database::class);
 

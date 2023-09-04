@@ -3,8 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "ligas/index.php";
-
 $db = App::resolve(Database::class);
 
 $ligas = $db->query('SELECT * FROM LIGA')->get();

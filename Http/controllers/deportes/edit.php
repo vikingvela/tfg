@@ -3,8 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "deportes/edit.php";
-
 $db = App::resolve(Database::class);
 
 // Encontrar el deporte correspondiente al id

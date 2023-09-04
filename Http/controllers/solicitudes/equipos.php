@@ -3,7 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "solicitudes/equipos.php";
 $db = App::resolve(Database::class);
 
 $equipo = getbyID($_GET['id'], 'EQUIPO');

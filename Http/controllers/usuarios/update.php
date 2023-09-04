@@ -4,8 +4,6 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
-echo "usuarios/update.php";
-
 $db = App::resolve(Database::class);
 $errors = [];
 

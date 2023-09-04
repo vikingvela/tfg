@@ -3,7 +3,6 @@ use Core\App;
 use Core\Validator;
 use Core\Database;
 
-echo "clasificacion/store.php";
 
 $db = App::resolve(Database::class);
 $errors = [];

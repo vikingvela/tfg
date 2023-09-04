@@ -4,7 +4,6 @@ use Core\App;
 use Core\Database;
 use Core\Session;
 
-echo "clasificacion/create.php";
 
 $db = App::resolve(Database::class);
 $liga = $db->query("SELECT * FROM liga WHERE id = :id", [

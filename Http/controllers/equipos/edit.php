@@ -3,8 +3,6 @@
 use Core\App;
 use Core\Database;
 
-echo "equipos/edit.php";
-
 $db = App::resolve(Database::class);
 
 // EQUIPO

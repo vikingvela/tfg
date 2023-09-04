@@ -4,7 +4,6 @@ use Core\App;
 use Core\Authenticator;
 use Core\Database;
 use Http\Forms\LoginForm;
-echo "session/store.php";
 
 $db = App::resolve(Database::class);
 

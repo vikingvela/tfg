@@ -1,7 +1,6 @@
 <?php require base_path('views/partials/head.php') ?>
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/banner.php')?>
-<?="ligas/edit.view.php"?>
 
 <main>
   <div class="border-b border-gray-900/10 pb-12">

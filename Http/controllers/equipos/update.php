@@ -4,7 +4,6 @@ use Core\App;
 use Core\Database;
 use Core\Validator;
 
-echo "equipos/update.php";
 
 $db = App::resolve(Database::class);
 $errors = [];

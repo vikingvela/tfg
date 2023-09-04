@@ -46,7 +46,7 @@
             <?php if (isset($equipo['cover'])) : ?>
                 <img src="<?= $equipo['cover'] ?>" alt="escudo de la equipo">
             <?php else : ?>
-                <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                <img class="w-full h-full rounded-full" src="https://img.freepik.com/vector-gratis/diseno-plantilla-logo_1195-105.jpg?w=826&t=st=1693767228~exp=1693767828~hmac=1c4129e298c95c2f8643b9f978b8eebdc1bca544ee88837daafefadcb07bebdd" alt="" />
             <?php endif; ?>
           </div>
         </div>
@@ -105,7 +105,7 @@
                                                         <?php if (isset($liga['logo'])) : ?>
                                                             <img src="<?= $liga['logo'] ?>" alt="Logo de la liga">
                                                         <?php else : ?>
-                                                            <img class="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt="" />
+                                                            <img class="w-full h-full rounded-full" src="https://img.freepik.com/vector-premium/logotipo-futbol-logotipo-futbol-logotipo-equipo-deportivo-vectortemplate_1195-968.jpg?w=826" alt="" />
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="ml-3">

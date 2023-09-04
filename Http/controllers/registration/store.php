@@ -7,7 +7,6 @@ use Core\Authenticator;
 
 $db = App::resolve(Database::class);
 
-echo "registration/store.php";
 
 $email = $_POST['email'];
 $password = $_POST['password'];
